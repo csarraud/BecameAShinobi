@@ -2,6 +2,7 @@ package fr.sonkuun.becameashinobi;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityAttachEventHandler;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
+import fr.sonkuun.becameashinobi.listener.BecameAShinobiListener;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +28,7 @@ public class BecameAShinobi
 		modEventBus.addListener(this::doClientStuff);
 		
 		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(new BecameAShinobiListener());
 		
 	}
 
