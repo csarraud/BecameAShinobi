@@ -90,4 +90,15 @@ public class ChakraData {
 		return new ChakraData();
 	}
 
+	public double getChakraMaxValue() {
+		return chakraMaxValue;
+	}
+
+	public double getChakraValue() {
+		return chakraValue;
+	}
+
+	public double getChakraRegenerationPerSecond() {
+		return chakraRegenerationPerSecond;
+	}
 }
