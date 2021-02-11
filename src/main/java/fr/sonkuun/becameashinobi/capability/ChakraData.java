@@ -12,9 +12,9 @@ public class ChakraData {
 	private double chakraRegenerationPerSecond;
 
 	public ChakraData() {
-		this.chakraMaxValue = 0;
+		this.chakraMaxValue = 100;
 		this.chakraValue = 0;
-		this.chakraRegenerationPerSecond = 0;
+		this.chakraRegenerationPerSecond = 1.0;
 	}
 	
 	public void setChakraValues(double maxValue, double value) {
