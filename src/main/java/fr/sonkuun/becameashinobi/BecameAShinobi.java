@@ -2,6 +2,7 @@ package fr.sonkuun.becameashinobi;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityAttachEventHandler;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
+import fr.sonkuun.becameashinobi.hud.BecameAShinobiHUD;
 import fr.sonkuun.becameashinobi.listener.BecameAShinobiListener;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,7 +30,7 @@ public class BecameAShinobi
 		
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new BecameAShinobiListener());
-		
+		MinecraftForge.EVENT_BUS.register(new BecameAShinobiHUD());
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
