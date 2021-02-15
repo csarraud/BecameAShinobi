@@ -1,7 +1,10 @@
 package fr.sonkuun.becameashinobi.hud;
 
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
 import net.minecraft.client.MainWindow;
@@ -18,6 +21,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @OnlyIn(Dist.CLIENT)
 public class BecameAShinobiHUD {
 
+	public static final ResourceLocation CHAKRA_CIRCULATION_TEXTURE = new ResourceLocation(BecameAShinobi.MODID, "textures/hud/chakra/chakra_circulation.png");
+	
 	@SubscribeEvent
 	public void renderOverlay(RenderGameOverlayEvent.Post event) {
 		if(event.getType() != ElementType.ALL) {
@@ -43,9 +48,16 @@ public class BecameAShinobiHUD {
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();
 		
+		int scaledWidth = window.getScaledWidth();
+		int scaledHeight = window.getScaledHeight();
+		System.out.println(String.format("[%s, %s]", scaledWidth, scaledHeight));
 		/*
 		 * TO DO : draw chakra bar
 		 */
+		GL11.glScaled(0.25, 0.25, 0.25);
+		bind(CHAKRA_CIRCULATION_TEXTURE);
+		gui.blit(scaledWidth, scaledHeight, 0, 0, 256, 256);
+		GL11.glScaled(4, 4, 4);
 		
 		bind(AbstractGui.GUI_ICONS_LOCATION);
 	}
