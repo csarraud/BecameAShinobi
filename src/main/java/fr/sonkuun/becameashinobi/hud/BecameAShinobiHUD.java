@@ -50,7 +50,6 @@ public class BecameAShinobiHUD {
 		
 		int scaledWidth = window.getScaledWidth();
 		int scaledHeight = window.getScaledHeight();
-		System.out.println(String.format("[%s, %s]", scaledWidth, scaledHeight));
 		/*
 		 * TO DO : draw chakra bar
 		 */
@@ -58,6 +57,8 @@ public class BecameAShinobiHUD {
 		bind(CHAKRA_CIRCULATION_TEXTURE);
 		gui.blit(scaledWidth, scaledHeight, 0, 0, 256, 256);
 		GL11.glScaled(4, 4, 4);
+		
+		
 		
 		bind(AbstractGui.GUI_ICONS_LOCATION);
 	}

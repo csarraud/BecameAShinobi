@@ -4,6 +4,7 @@ import fr.sonkuun.becameashinobi.capability.CapabilityAttachEventHandler;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.hud.BecameAShinobiHUD;
 import fr.sonkuun.becameashinobi.listener.BecameAShinobiListener;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class BecameAShinobi
 {
 	public static final String MODID = "becameashinobi";
+	public static final Minecraft MC = Minecraft.getInstance();
 
 	public BecameAShinobi() {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
