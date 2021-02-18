@@ -51,6 +51,15 @@ public class ChakraData {
 		}
 	}
 	
+	public void useChakra(double amount) {
+		if((this.chakraValue - amount) < 0) {
+			this.chakraValue = 0.0;
+		}
+		else {
+			this.chakraValue -= amount;
+		}
+	}
+	
 	public static final String CHAKRA_MAX_VALUE_NBT = "chakra_max_value";
 	public static final String CHAKRA_VALUE_NBT = "chakra_value";
 	public static final String CHAKRA_REGENERATION_PER_SECOND_NBT = "chakra_regeneration_per_second";
