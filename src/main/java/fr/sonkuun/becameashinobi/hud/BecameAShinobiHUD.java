@@ -5,6 +5,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
+import fr.sonkuun.becameashinobi.geom.Direction;
+import fr.sonkuun.becameashinobi.geom.Point;
+import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
@@ -59,6 +62,10 @@ public class BecameAShinobiHUD {
 
 		double chakraPercent = chakraData.getChakraValue() / chakraData.getChakraMaxValue();
 		int chakraProgress = (int) (textureHeight - textureHeight * chakraPercent);
+		
+		GlUtil.scale(0.25f);
+		//GlUtil.drawString(Double.toString(chakraData.getChakraMaxValue()), new Point(posX, posY), Direction.CENTER, new Color(0, 0, 255));
+		GlUtil.drawString(Double.toString(chakraData.getChakraValue()), new Point(posX + (int) (textureWidth * 0.7), posY - 10), Direction.CENTER, new Color(0, 0, 255));
 
 		/*
 		 * Allow transparency for the custom texture
@@ -66,14 +73,12 @@ public class BecameAShinobiHUD {
 		RenderSystem.enableAlphaTest();
 		RenderSystem.enableBlend();
 		
-		GlUtil.scale(0.25f);
 		bind(CHAKRA_TEXTURE);
 		gui.blit(posX, posY + chakraProgress, 0, chakraProgress, textureWidth, textureHeight - chakraProgress);
 		
 		bind(CHAKRA_CIRCULATION_TEXTURE);
 		gui.blit(posX, posY, 0, 0, textureWidth, textureHeight);
 		GlUtil.scale(4f);
-		
 		
 		bind(AbstractGui.GUI_ICONS_LOCATION);
 	}
