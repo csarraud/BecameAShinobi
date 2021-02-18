@@ -1,12 +1,11 @@
 package fr.sonkuun.becameashinobi.hud;
 
-import org.lwjgl.opengl.GL11;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
+import fr.sonkuun.becameashinobi.util.GlUtil;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -22,6 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class BecameAShinobiHUD {
 
 	public static final ResourceLocation CHAKRA_CIRCULATION_TEXTURE = new ResourceLocation(BecameAShinobi.MODID, "textures/hud/chakra/chakra_circulation.png");
+	public static final ResourceLocation CHAKRA_TEXTURE = new ResourceLocation(BecameAShinobi.MODID, "textures/hud/chakra/chakra.png");
 	
 	@SubscribeEvent
 	public void renderOverlay(RenderGameOverlayEvent.Post event) {
@@ -48,16 +48,31 @@ public class BecameAShinobiHUD {
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();
 		
-		int scaledWidth = window.getScaledWidth();
-		int scaledHeight = window.getScaledHeight();
-		/*
-		 * TO DO : draw chakra bar
-		 */
-		GL11.glScaled(0.25, 0.25, 0.25);
-		bind(CHAKRA_CIRCULATION_TEXTURE);
-		gui.blit(scaledWidth, scaledHeight, 0, 0, 256, 256);
-		GL11.glScaled(4, 4, 4);
+		int width = window.getWidth();
+		int height = window.getHeight();
 		
+		int textureWidth = 256;
+		int textureHeight = 256;
+		
+		int posX = (int) ((width * (4.0 / window.getGuiScaleFactor()) - textureWidth));
+		int posY = (int) (((height - textureHeight) / 2) * (4.0 / window.getGuiScaleFactor()));
+
+		double chakraPercent = chakraData.getChakraValue() / chakraData.getChakraMaxValue();
+		int chakraProgress = (int) (textureHeight - textureHeight * chakraPercent);
+
+		/*
+		 * Allow transparency for the custom texture
+		 */
+		RenderSystem.enableAlphaTest();
+		RenderSystem.enableBlend();
+		
+		GlUtil.scale(0.25f);
+		bind(CHAKRA_TEXTURE);
+		gui.blit(posX, posY + chakraProgress, 0, chakraProgress, textureWidth, textureHeight - chakraProgress);
+		
+		bind(CHAKRA_CIRCULATION_TEXTURE);
+		gui.blit(posX, posY, 0, 0, textureWidth, textureHeight);
+		GlUtil.scale(4f);
 		
 		
 		bind(AbstractGui.GUI_ICONS_LOCATION);
