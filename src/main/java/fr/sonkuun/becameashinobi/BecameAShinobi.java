@@ -4,6 +4,7 @@ import fr.sonkuun.becameashinobi.capability.CapabilityAttachEventHandler;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.hud.BecameAShinobiHUD;
 import fr.sonkuun.becameashinobi.listener.BecameAShinobiListener;
+import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,6 +38,7 @@ public class BecameAShinobi
 
 	private void setup(final FMLCommonSetupEvent event) {
 		CapabilityBecameAShinobi.register();
+		BecameAShinobiPacketHandler.register();
 		
 		MinecraftForge.EVENT_BUS.register(CapabilityAttachEventHandler.class);
 	}

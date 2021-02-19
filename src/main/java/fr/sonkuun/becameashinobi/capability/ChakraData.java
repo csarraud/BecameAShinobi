@@ -1,7 +1,9 @@
 package fr.sonkuun.becameashinobi.capability;
 
+import fr.sonkuun.becameashinobi.network.MyPacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -19,17 +21,30 @@ public class ChakraData {
 		this.chakraRegenerationTick = 0;
 	}
 	
-	public void setChakraValues(double maxValue, double value) {
+	public ChakraData(ChakraData data) {
+		this.chakraMaxValue = data.getChakraMaxValue();
+		this.chakraValue = data.getChakraValue();
+		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
+		this.chakraRegenerationTick = data.getChakraRegenerationTick();
+	}
+	
+	public ChakraData setChakraValues(double maxValue, double value) {
 		this.chakraMaxValue = maxValue;
 		this.chakraValue = value;
+		
+		return this;
 	}
 	
-	public void setChakraRegenerationPerSecond(double value) {
+	public ChakraData setChakraRegenerationPerSecond(double value) {
 		this.chakraRegenerationPerSecond = value;
+		
+		return this;
 	}
 	
-	public void setChakraRegenerationTick(int tick) {
+	public ChakraData setChakraRegenerationTick(int tick) {
 		this.chakraRegenerationTick = tick;
+		
+		return this;
 	}
 	
 	public void updateChakra() {
@@ -58,6 +73,22 @@ public class ChakraData {
 		else {
 			this.chakraValue -= amount;
 		}
+	}
+	
+	public void synchronize(MyPacket packet) {
+		ChakraData data = packet.getChakraData();
+		
+		this.chakraMaxValue = data.getChakraMaxValue();
+		this.chakraValue = data.getChakraValue();
+		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
+		this.chakraRegenerationTick = data.getChakraRegenerationTick();
+	}
+	
+	public static ChakraData fromPacketBuffer(PacketBuffer buffer) {
+		return new ChakraData()
+				.setChakraValues(buffer.readDouble(), buffer.readDouble())
+				.setChakraRegenerationPerSecond(buffer.readDouble())
+				.setChakraRegenerationTick(buffer.readInt());
 	}
 	
 	public static final String CHAKRA_MAX_VALUE_NBT = "chakra_max_value";
@@ -109,5 +140,16 @@ public class ChakraData {
 
 	public double getChakraRegenerationPerSecond() {
 		return chakraRegenerationPerSecond;
+	}
+
+	public int getChakraRegenerationTick() {
+		return chakraRegenerationTick;
+	}
+
+	@Override
+	public String toString() {
+		return "ChakraData [chakraMaxValue=" + chakraMaxValue + ", chakraValue=" + chakraValue
+				+ ", chakraRegenerationPerSecond=" + chakraRegenerationPerSecond + ", chakraRegenerationTick="
+				+ chakraRegenerationTick + "]";
 	}
 }
