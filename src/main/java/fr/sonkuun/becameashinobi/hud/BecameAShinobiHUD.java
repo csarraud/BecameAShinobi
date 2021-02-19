@@ -63,10 +63,12 @@ public class BecameAShinobiHUD {
 		double chakraPercent = chakraData.getChakraValue() / chakraData.getChakraMaxValue();
 		int chakraProgress = (int) (textureHeight - textureHeight * chakraPercent);
 		
+		GlUtil.scale(0.5f);
+		GlUtil.drawString(Double.toString(chakraData.getChakraValue()), new Point(posX + (int) (textureWidth * 0.73), posY - 10).scale(0.5f), Direction.CENTER, new Color(129, 189, 249));
+		GlUtil.scale(2f);
+		
 		GlUtil.scale(0.25f);
-		//GlUtil.drawString(Double.toString(chakraData.getChakraMaxValue()), new Point(posX, posY), Direction.CENTER, new Color(0, 0, 255));
-		GlUtil.drawString(Double.toString(chakraData.getChakraValue()), new Point(posX + (int) (textureWidth * 0.7), posY - 10), Direction.CENTER, new Color(0, 0, 255));
-
+		
 		/*
 		 * Allow transparency for the custom texture
 		 */
