@@ -8,6 +8,8 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class ChakraData {
+	
+	private static int NB_TICKS_PER_SECOND = 20;
 
 	private double chakraMaxValue;
 	private double chakraValue;
@@ -48,7 +50,7 @@ public class ChakraData {
 	}
 	
 	public void updateChakra() {
-		if(this.chakraRegenerationTick >= 40) {
+		if(this.chakraRegenerationTick >= NB_TICKS_PER_SECOND) {
 			this.addChakra(this.chakraRegenerationPerSecond);
 			this.chakraRegenerationTick = 0;
 		}
