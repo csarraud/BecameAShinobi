@@ -1,12 +1,16 @@
 package fr.sonkuun.becameashinobi.capability;
 
+import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import fr.sonkuun.becameashinobi.util.MathUtil;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ChakraData {
 	
@@ -16,6 +20,7 @@ public class ChakraData {
 	private double chakraValue;
 	private double baseChakraRegenerationPerSecond;
 	private double chakraRegenerationPerSecond;
+	private int chakraRegenerationFactor;
 	private int chakraRegenerationTick;
 
 	public ChakraData() {
@@ -23,6 +28,7 @@ public class ChakraData {
 		this.chakraValue = 0;
 		this.baseChakraRegenerationPerSecond = 1.0;
 		this.chakraRegenerationPerSecond = 1.0;
+		this.chakraRegenerationFactor = 100;
 		this.chakraRegenerationTick = 0;
 	}
 	
@@ -31,6 +37,7 @@ public class ChakraData {
 		this.chakraValue = data.getChakraValue();
 		this.baseChakraRegenerationPerSecond = data.getBaseChakraRegenerationPerSecond();
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
+		this.chakraRegenerationFactor = data.getChakraRegenerationFactor();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 	}
 	
@@ -53,13 +60,31 @@ public class ChakraData {
 		return this;
 	}
 	
+	public ChakraData setChakraRegenerationFactor(int factor) {
+		this.chakraRegenerationFactor = factor;
+		
+		return this;
+	}
+	
 	public ChakraData setChakraRegenerationTick(int tick) {
 		this.chakraRegenerationTick = tick;
 		
 		return this;
 	}
 	
-	public void updateChakra() {
+	public void updateChakra(PlayerEntity player) {
+		if(player.isSneaking()) {
+			this.chakraRegenerationPerSecond = this.baseChakraRegenerationPerSecond * this.chakraRegenerationFactor / 100 + this.baseChakraRegenerationPerSecond;
+		}
+		else {
+			this.chakraRegenerationPerSecond = this.baseChakraRegenerationPerSecond;
+		}
+		
+		regenerateChakra();
+		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ChakraPacket(player.getUniqueID(), this));
+	}
+	
+	public void regenerateChakra() {
 		if(this.chakraRegenerationTick >= NB_TICKS_PER_SECOND) {
 			this.addChakra(MathUtil.round(this.chakraRegenerationPerSecond, 1));
 			this.chakraRegenerationTick = 0;
@@ -94,6 +119,7 @@ public class ChakraData {
 		this.chakraValue = data.getChakraValue();
 		this.baseChakraRegenerationPerSecond = data.getBaseChakraRegenerationPerSecond();
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
+		this.chakraRegenerationFactor = data.getChakraRegenerationFactor();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 	}
 	
@@ -102,6 +128,7 @@ public class ChakraData {
 				.setChakraValues(buffer.readDouble(), buffer.readDouble())
 				.setBaseChakraRegenerationPerSecond(buffer.readDouble())
 				.setChakraRegenerationPerSecond(buffer.readDouble())
+				.setChakraRegenerationFactor(buffer.readInt())
 				.setChakraRegenerationTick(buffer.readInt());
 	}
 	
@@ -109,6 +136,7 @@ public class ChakraData {
 	public static final String CHAKRA_VALUE_NBT = "chakra_value";
 	public static final String BASE_CHAKRA_REGENERATION_PER_SECOND_NBT = "base_chakra_regeneration_per_second";
 	public static final String CHAKRA_REGENERATION_PER_SECOND_NBT = "chakra_regeneration_per_second";
+	public static final String CHAKRA_REGENERATION_FACTOR_NBT = "chakra_regeneration_factor";
 	public static final String CHAKRA_REGENERATION_TICK_NBT = "chakra_regeneration_tick";
 
 	public static class ShinobiWeaponDataNBTStorage implements Capability.IStorage<ChakraData> {
@@ -121,6 +149,7 @@ public class ChakraData {
 			tag.putDouble(CHAKRA_VALUE_NBT, instance.chakraValue);
 			tag.putDouble(BASE_CHAKRA_REGENERATION_PER_SECOND_NBT, instance.baseChakraRegenerationPerSecond);
 			tag.putDouble(CHAKRA_REGENERATION_PER_SECOND_NBT, instance.chakraRegenerationPerSecond);
+			tag.putInt(CHAKRA_REGENERATION_FACTOR_NBT, instance.getChakraRegenerationFactor());
 			tag.putInt(CHAKRA_REGENERATION_TICK_NBT, instance.chakraRegenerationTick);
 
 			return tag;
@@ -137,6 +166,7 @@ public class ChakraData {
 						tag.getDouble(CHAKRA_VALUE_NBT));
 				instance.setBaseChakraRegenerationPerSecond(tag.getDouble(BASE_CHAKRA_REGENERATION_PER_SECOND_NBT));
 				instance.setChakraRegenerationPerSecond(tag.getDouble(CHAKRA_REGENERATION_PER_SECOND_NBT));
+				instance.setChakraRegenerationFactor(tag.getInt(CHAKRA_REGENERATION_FACTOR_NBT));
 				instance.setChakraRegenerationTick(tag.getInt(CHAKRA_REGENERATION_TICK_NBT));
 			}
 		}
@@ -163,6 +193,10 @@ public class ChakraData {
 		return chakraRegenerationPerSecond;
 	}
 
+	public int getChakraRegenerationFactor() {
+		return chakraRegenerationFactor;
+	}
+
 	public int getChakraRegenerationTick() {
 		return chakraRegenerationTick;
 	}
@@ -171,7 +205,7 @@ public class ChakraData {
 	public String toString() {
 		return "ChakraData [chakraMaxValue=" + chakraMaxValue + ", chakraValue=" + chakraValue
 				+ ", baseChakraRegenerationPerSecond=" + baseChakraRegenerationPerSecond
-				+ ", chakraRegenerationPerSecond=" + chakraRegenerationPerSecond + ", chakraRegenerationTick="
-				+ chakraRegenerationTick + "]";
+				+ ", chakraRegenerationPerSecond=" + chakraRegenerationPerSecond + ", chakraRegenerationFactor="
+				+ chakraRegenerationFactor + ", chakraRegenerationTick=" + chakraRegenerationTick + "]";
 	}
 }

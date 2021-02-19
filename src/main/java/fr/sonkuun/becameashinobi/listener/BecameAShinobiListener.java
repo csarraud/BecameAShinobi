@@ -42,7 +42,6 @@ public class BecameAShinobiListener {
 		
 		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
 		
-		chakraData.updateChakra();
-		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ChakraPacket(player.getUniqueID(), chakraData));
+		chakraData.updateChakra(player);
 	}
 }
