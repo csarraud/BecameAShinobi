@@ -1,6 +1,7 @@
 package fr.sonkuun.becameashinobi.capability;
 
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
+import fr.sonkuun.becameashinobi.util.MathUtil;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -60,7 +61,7 @@ public class ChakraData {
 	
 	public void updateChakra() {
 		if(this.chakraRegenerationTick >= NB_TICKS_PER_SECOND) {
-			this.addChakra(this.chakraRegenerationPerSecond);
+			this.addChakra(MathUtil.round(this.chakraRegenerationPerSecond, 1));
 			this.chakraRegenerationTick = 0;
 		}
 		else {
