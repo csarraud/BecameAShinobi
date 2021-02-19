@@ -7,6 +7,6 @@ Minecraft mod adding Naruto rpg theme
 - Add hereditary capabilities
 - Add rpg mecanism
 
-# Acknowledgments
+# Credits
 
 - [Better-HUD](https://github.com/mccreery/better-hud) for geom and util packages
