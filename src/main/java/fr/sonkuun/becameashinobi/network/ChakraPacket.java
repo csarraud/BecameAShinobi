@@ -37,6 +37,7 @@ public class ChakraPacket {
 		buffer.writeUniqueId(message.getUUID());
 		buffer.writeDouble(message.getChakraData().getChakraMaxValue());
 		buffer.writeDouble(message.getChakraData().getChakraValue());
+		buffer.writeDouble(message.getChakraData().getBaseChakraRegenerationPerSecond());
 		buffer.writeDouble(message.getChakraData().getChakraRegenerationPerSecond());
 		buffer.writeInt(message.getChakraData().getChakraRegenerationTick());
 	}

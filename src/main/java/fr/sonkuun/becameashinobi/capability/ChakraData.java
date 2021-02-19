@@ -13,12 +13,14 @@ public class ChakraData {
 
 	private double chakraMaxValue;
 	private double chakraValue;
+	private double baseChakraRegenerationPerSecond;
 	private double chakraRegenerationPerSecond;
 	private int chakraRegenerationTick;
 
 	public ChakraData() {
 		this.chakraMaxValue = 100;
 		this.chakraValue = 0;
+		this.baseChakraRegenerationPerSecond = 1.0;
 		this.chakraRegenerationPerSecond = 1.0;
 		this.chakraRegenerationTick = 0;
 	}
@@ -26,6 +28,7 @@ public class ChakraData {
 	public ChakraData(ChakraData data) {
 		this.chakraMaxValue = data.getChakraMaxValue();
 		this.chakraValue = data.getChakraValue();
+		this.baseChakraRegenerationPerSecond = data.getBaseChakraRegenerationPerSecond();
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 	}
@@ -33,6 +36,12 @@ public class ChakraData {
 	public ChakraData setChakraValues(double maxValue, double value) {
 		this.chakraMaxValue = maxValue;
 		this.chakraValue = value;
+		
+		return this;
+	}
+	
+	public ChakraData setBaseChakraRegenerationPerSecond(double value) {
+		this.baseChakraRegenerationPerSecond = value;
 		
 		return this;
 	}
@@ -82,6 +91,7 @@ public class ChakraData {
 		
 		this.chakraMaxValue = data.getChakraMaxValue();
 		this.chakraValue = data.getChakraValue();
+		this.baseChakraRegenerationPerSecond = data.getBaseChakraRegenerationPerSecond();
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 	}
@@ -89,12 +99,14 @@ public class ChakraData {
 	public static ChakraData fromPacketBuffer(PacketBuffer buffer) {
 		return new ChakraData()
 				.setChakraValues(buffer.readDouble(), buffer.readDouble())
+				.setBaseChakraRegenerationPerSecond(buffer.readDouble())
 				.setChakraRegenerationPerSecond(buffer.readDouble())
 				.setChakraRegenerationTick(buffer.readInt());
 	}
 	
 	public static final String CHAKRA_MAX_VALUE_NBT = "chakra_max_value";
 	public static final String CHAKRA_VALUE_NBT = "chakra_value";
+	public static final String BASE_CHAKRA_REGENERATION_PER_SECOND_NBT = "base_chakra_regeneration_per_second";
 	public static final String CHAKRA_REGENERATION_PER_SECOND_NBT = "chakra_regeneration_per_second";
 	public static final String CHAKRA_REGENERATION_TICK_NBT = "chakra_regeneration_tick";
 
@@ -106,6 +118,7 @@ public class ChakraData {
 
 			tag.putDouble(CHAKRA_MAX_VALUE_NBT, instance.chakraMaxValue);
 			tag.putDouble(CHAKRA_VALUE_NBT, instance.chakraValue);
+			tag.putDouble(BASE_CHAKRA_REGENERATION_PER_SECOND_NBT, instance.baseChakraRegenerationPerSecond);
 			tag.putDouble(CHAKRA_REGENERATION_PER_SECOND_NBT, instance.chakraRegenerationPerSecond);
 			tag.putInt(CHAKRA_REGENERATION_TICK_NBT, instance.chakraRegenerationTick);
 
@@ -121,6 +134,7 @@ public class ChakraData {
 				instance.setChakraValues(
 						tag.getDouble(CHAKRA_MAX_VALUE_NBT),
 						tag.getDouble(CHAKRA_VALUE_NBT));
+				instance.setBaseChakraRegenerationPerSecond(tag.getDouble(BASE_CHAKRA_REGENERATION_PER_SECOND_NBT));
 				instance.setChakraRegenerationPerSecond(tag.getDouble(CHAKRA_REGENERATION_PER_SECOND_NBT));
 				instance.setChakraRegenerationTick(tag.getInt(CHAKRA_REGENERATION_TICK_NBT));
 			}
@@ -140,6 +154,10 @@ public class ChakraData {
 		return chakraValue;
 	}
 
+	public double getBaseChakraRegenerationPerSecond() {
+		return baseChakraRegenerationPerSecond;
+	}
+
 	public double getChakraRegenerationPerSecond() {
 		return chakraRegenerationPerSecond;
 	}
@@ -151,6 +169,7 @@ public class ChakraData {
 	@Override
 	public String toString() {
 		return "ChakraData [chakraMaxValue=" + chakraMaxValue + ", chakraValue=" + chakraValue
+				+ ", baseChakraRegenerationPerSecond=" + baseChakraRegenerationPerSecond
 				+ ", chakraRegenerationPerSecond=" + chakraRegenerationPerSecond + ", chakraRegenerationTick="
 				+ chakraRegenerationTick + "]";
 	}
