@@ -3,7 +3,7 @@ package fr.sonkuun.becameashinobi.listener;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
-import fr.sonkuun.becameashinobi.network.MyPacket;
+import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -24,7 +24,7 @@ public class BecameAShinobiListener {
 			ChakraData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
 			data.useChakra(10);
 			PlayerEntity player = event.getPlayer();
-			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new MyPacket(player.getUniqueID(), data));
+			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new ChakraPacket(player.getUniqueID(), data));
 		}
 	}
 	
@@ -43,6 +43,6 @@ public class BecameAShinobiListener {
 		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
 		
 		chakraData.updateChakra();
-		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new MyPacket(player.getUniqueID(), chakraData));
+		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ChakraPacket(player.getUniqueID(), chakraData));
 	}
 }

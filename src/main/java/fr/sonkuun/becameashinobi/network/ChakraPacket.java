@@ -11,17 +11,17 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
-public class MyPacket {
+public class ChakraPacket {
 
 	private UUID uuid;
 	private ChakraData chakraData;
 	
-	public MyPacket(UUID uuid, ChakraData data) {
+	public ChakraPacket(UUID uuid, ChakraData data) {
 		this.uuid = uuid;
 		this.chakraData = new ChakraData(data);
 	}
 
-	public MyPacket() {
+	public ChakraPacket() {
 		this.uuid = null;
 	}
 	
@@ -33,7 +33,7 @@ public class MyPacket {
 		return this.uuid;
 	}
 
-	public void encode(MyPacket message, PacketBuffer buffer) {
+	public void encode(ChakraPacket message, PacketBuffer buffer) {
 		buffer.writeUniqueId(message.getUUID());
 		buffer.writeDouble(message.getChakraData().getChakraMaxValue());
 		buffer.writeDouble(message.getChakraData().getChakraValue());
@@ -41,11 +41,11 @@ public class MyPacket {
 		buffer.writeInt(message.getChakraData().getChakraRegenerationTick());
 	}
 
-	public MyPacket decode(PacketBuffer buffer) {
-		return new MyPacket(buffer.readUniqueId(), ChakraData.fromPacketBuffer(buffer));
+	public ChakraPacket decode(PacketBuffer buffer) {
+		return new ChakraPacket(buffer.readUniqueId(), ChakraData.fromPacketBuffer(buffer));
 	}
 
-	public void handle(MyPacket message, Supplier<Context> supplier) {
+	public void handle(ChakraPacket message, Supplier<Context> supplier) {
 		supplier.get().enqueueWork(() -> {
 			
 			/*

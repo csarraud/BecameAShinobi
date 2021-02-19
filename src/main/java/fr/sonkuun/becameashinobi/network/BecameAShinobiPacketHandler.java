@@ -18,8 +18,8 @@ public class BecameAShinobiPacketHandler {
 	private static int ID = 1;
 	
 	public static void register() {
-		MyPacket message = new MyPacket();
-		INSTANCE.registerMessage(ID++, MyPacket.class, message::encode, message::decode, message::handle);
+		ChakraPacket message = new ChakraPacket();
+		INSTANCE.registerMessage(ID++, ChakraPacket.class, message::encode, message::decode, message::handle);
 		
 	}
 	

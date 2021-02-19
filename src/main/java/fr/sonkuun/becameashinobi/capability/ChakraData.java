@@ -1,6 +1,6 @@
 package fr.sonkuun.becameashinobi.capability;
 
-import fr.sonkuun.becameashinobi.network.MyPacket;
+import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -75,7 +75,7 @@ public class ChakraData {
 		}
 	}
 	
-	public void synchronize(MyPacket packet) {
+	public void synchronize(ChakraPacket packet) {
 		ChakraData data = packet.getChakraData();
 		
 		this.chakraMaxValue = data.getChakraMaxValue();
