@@ -2,10 +2,12 @@ package fr.sonkuun.becameashinobi.listener;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
+import fr.sonkuun.becameashinobi.gui.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -25,6 +27,15 @@ public class BecameAShinobiListener {
 			data.useChakra(10);
 			PlayerEntity player = event.getPlayer();
 			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new ChakraPacket(player.getUniqueID(), data));
+		}
+	}
+	/*
+	 * Add a button to open Jutsu Tree Gui
+	 */
+	@SubscribeEvent
+	public void playerInventoryOpened(GuiScreenEvent.InitGuiEvent.Post event) {
+		if(event.getGui() instanceof InventoryScreen) {
+			event.addWidget(new JutsuTreeGuiWidget(50, 50, "Jutsu Tree"));
 		}
 	}
 	
