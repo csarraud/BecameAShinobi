@@ -2,7 +2,8 @@ package fr.sonkuun.becameashinobi.listener;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
-import fr.sonkuun.becameashinobi.gui.JutsuTreeGuiWidget;
+import fr.sonkuun.becameashinobi.gui.AbstractJutsuGui;
+import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
