@@ -26,7 +26,7 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
             this.blit(this.x, this.y, 56, 0, 28, 32);
 
             bind(getTexture());
-            this.blit(this.x + 5, this.y + 8, getOffsetX(), getOffsetY(), 32, 32);
+            this.blit(this.x + 6, this.y + 8, getOffsetX(), getOffsetY(), 16, 16);
             
             if (this.isHovered) {
                 mc.currentScreen.renderTooltip(getScreenName(), mouseX, mouseY);
