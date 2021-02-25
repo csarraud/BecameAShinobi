@@ -13,7 +13,7 @@ public class KatonSkillTreeWidget extends AbstractSkillTreeWidget {
 
 	@Override
 	public ResourceLocation getTexture() {
-		return new ResourceLocation(BecameAShinobi.MODID, "textures/gui/katon.png");
+		return new ResourceLocation(BecameAShinobi.MODID, "textures/gui/element.png");
 	}
 
 	@Override
@@ -24,6 +24,16 @@ public class KatonSkillTreeWidget extends AbstractSkillTreeWidget {
 	@Override
 	public Screen getGuiToDisplay() {
 		return null;
+	}
+
+	@Override
+	public int getOffsetX() {
+		return 0;
+	}
+
+	@Override
+	public int getOffsetY() {
+		return 0;
 	}
 
 }

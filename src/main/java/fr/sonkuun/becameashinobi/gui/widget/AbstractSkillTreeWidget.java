@@ -8,8 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class AbstractSkillTreeWidget extends Widget implements IToSkillTreeWidget{
@@ -23,10 +21,13 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
         if (this.visible)
         {
             Minecraft mc  = Minecraft.getInstance();
-            mc.getTextureManager().bindTexture(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
+            bind(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             this.blit(this.x, this.y, 56, 0, 28, 32);
 
+            bind(getTexture());
+            this.blit(this.x + 5, this.y + 8, getOffsetX(), getOffsetY(), 32, 32);
+            
             if (this.isHovered) {
                 mc.currentScreen.renderTooltip(getScreenName(), mouseX, mouseY);
             }
@@ -34,7 +35,6 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
             RenderSystem.enableRescaleNormal();
             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             RenderHelper.enableStandardItemLighting();
-            mc.getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(Items.BOOK), this.x + 6, this.y + 10);
         }
     }
 
@@ -49,4 +49,8 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
 	
 	public abstract String getScreenName();
 	public abstract Screen getGuiToDisplay();
+	
+	public void bind(ResourceLocation resource) {
+		Minecraft.getInstance().getTextureManager().bindTexture(resource);
+	}
 }
