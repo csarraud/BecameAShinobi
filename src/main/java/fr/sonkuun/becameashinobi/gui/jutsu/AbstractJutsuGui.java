@@ -1,4 +1,4 @@
-package fr.sonkuun.becameashinobi.gui;
+package fr.sonkuun.becameashinobi.gui.jutsu;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 

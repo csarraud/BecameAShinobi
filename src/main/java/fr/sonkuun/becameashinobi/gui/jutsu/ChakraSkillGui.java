@@ -1,4 +1,4 @@
-package fr.sonkuun.becameashinobi.gui;
+package fr.sonkuun.becameashinobi.gui.jutsu;
 
 import fr.sonkuun.becameashinobi.geom.Rect;
 import fr.sonkuun.becameashinobi.gui.widget.DotonSkillTreeWidget;
