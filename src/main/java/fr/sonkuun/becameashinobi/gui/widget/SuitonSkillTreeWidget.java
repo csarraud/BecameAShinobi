@@ -1,6 +1,8 @@
 package fr.sonkuun.becameashinobi.gui.widget;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
+import fr.sonkuun.becameashinobi.gui.jutsu.SuitonJutsuSkillGui;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;
 
@@ -32,7 +34,7 @@ public class SuitonSkillTreeWidget extends AbstractSkillTreeWidget {
 
 	@Override
 	public Screen getGuiToDisplay() {
-		return null;
+		return new SuitonJutsuSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager());
 	}
 
 }
