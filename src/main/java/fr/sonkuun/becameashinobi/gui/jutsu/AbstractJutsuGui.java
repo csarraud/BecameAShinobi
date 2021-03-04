@@ -66,6 +66,7 @@ public abstract class AbstractJutsuGui extends Screen {
         RenderSystem.pushMatrix();
         RenderSystem.translated((float) (boxLeft), (float) (boxTop), 0.0F);
         RenderSystem.enableDepthTest();
+        GlUtil.drawRect(new Rect(0, 0, insideWidth, insideHeight), this.getFontColor());
         this.drawInside(boxLeft, boxTop, boxRight, boxBottom, insideWidth, insideHeight);
         RenderSystem.popMatrix();
         RenderSystem.depthFunc(515);
@@ -73,7 +74,8 @@ public abstract class AbstractJutsuGui extends Screen {
 	}
 
     protected abstract void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight);
-
+    protected abstract Color getFontColor();
+    
 	public void renderWindow(int left, int top, int right, int bottom) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();

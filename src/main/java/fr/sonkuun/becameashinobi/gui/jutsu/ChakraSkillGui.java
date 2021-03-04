@@ -1,14 +1,11 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
-import fr.sonkuun.becameashinobi.geom.Rect;
 import fr.sonkuun.becameashinobi.gui.widget.DotonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.gui.widget.FutonSkillTreeWidget;
-import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.gui.widget.KatonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.gui.widget.RaitonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.gui.widget.SuitonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.util.Color;
-import fr.sonkuun.becameashinobi.util.GlUtil;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
 public class ChakraSkillGui extends AbstractJutsuGui {
@@ -37,7 +34,12 @@ public class ChakraSkillGui extends AbstractJutsuGui {
 
 	@Override
 	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
-        GlUtil.drawRect(new Rect(0, 0, insideWidth, insideHeight), new Color(198, 198, 198));
+
+	}
+
+	@Override
+	protected Color getFontColor() {
+		return new Color(100, 198, 198, 198);
 	}
 
 }
