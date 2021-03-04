@@ -37,7 +37,7 @@ public class ChakraSkillGui extends AbstractJutsuGui {
 
 	@Override
 	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
-        GlUtil.drawRect(new Rect(0, 0, insideWidth, insideHeight), new Color(198, 198, 198));		
+        GlUtil.drawRect(new Rect(0, 0, insideWidth, insideHeight), new Color(198, 198, 198));
 	}
 
 }

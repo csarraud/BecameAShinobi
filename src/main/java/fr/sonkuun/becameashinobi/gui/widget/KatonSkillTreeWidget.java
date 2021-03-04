@@ -1,6 +1,8 @@
 package fr.sonkuun.becameashinobi.gui.widget;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
+import fr.sonkuun.becameashinobi.gui.jutsu.KatonJutsuSkillGui;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,7 +25,7 @@ public class KatonSkillTreeWidget extends AbstractSkillTreeWidget {
 
 	@Override
 	public Screen getGuiToDisplay() {
-		return null;
+		return new KatonJutsuSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager());
 	}
 
 	@Override
