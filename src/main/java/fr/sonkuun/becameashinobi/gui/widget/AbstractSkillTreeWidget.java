@@ -34,7 +34,6 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
             
             RenderSystem.enableRescaleNormal();
             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-            RenderHelper.enableStandardItemLighting();
         }
     }
 
