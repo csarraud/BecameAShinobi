@@ -1,7 +1,7 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
-import fr.sonkuun.becameashinobi.gui.jutsu.items.AbstractSkillItem;
-import fr.sonkuun.becameashinobi.gui.jutsu.items.FireballSkillItem;
+import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.AbstractSkillObject;
+import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.FireballSkillObject;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
@@ -14,7 +14,7 @@ public class KatonJutsuSkillGui extends AbstractJutsuGui {
 	@Override
 	protected void init() {
 		
-		this.skillItems.add(new FireballSkillItem(20, 20, 20, 20));
+		this.skillObjects.add(new FireballSkillObject(20, 20, 20, 20));
 		
 		super.init();
 	}
@@ -24,11 +24,11 @@ public class KatonJutsuSkillGui extends AbstractJutsuGui {
 		//System.out.println(String.format("[Zoom = %s, deltaX = %s, deltaY = %s]",
 				//this.zoom, this.deltaX, this.deltaY));
 		
-		for(AbstractSkillItem skillItem : this.skillItems) {
+		for(AbstractSkillObject skillItem : this.skillObjects) {
 			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
 		}
 		
-		for(AbstractSkillItem skillItem : this.skillItems) {
+		for(AbstractSkillObject skillItem : this.skillObjects) {
 			if(skillItem.isMouseOver()) {
 				this.renderTooltip(skillItem.getDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
 			}

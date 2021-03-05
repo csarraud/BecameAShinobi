@@ -7,7 +7,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.geom.Rect;
-import fr.sonkuun.becameashinobi.gui.jutsu.items.AbstractSkillItem;
+import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.AbstractSkillObject;
 import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
 import fr.sonkuun.becameashinobi.util.RenderUtil;
@@ -28,7 +28,7 @@ public abstract class AbstractJutsuGui extends Screen {
     protected float zoom = MIN_ZOOM;
     protected int deltaX = 0, deltaY = 0;
     
-    protected List<AbstractSkillItem> skillItems = new ArrayList<AbstractSkillItem>();
+    protected List<AbstractSkillObject> skillObjects = new ArrayList<AbstractSkillObject>();
 
 	protected AbstractJutsuGui(ClientAdvancementManager clientAdvancementManager) {
 		super(NarratorChatListener.EMPTY);
@@ -152,7 +152,7 @@ public abstract class AbstractJutsuGui extends Screen {
 		int boxLeft = left + PADDING;
         int boxTop = top + 2*PADDING;
 		
-		for(AbstractSkillItem skillItem : skillItems) {
+		for(AbstractSkillObject skillItem : skillObjects) {
 			skillItem.isMouseOver(x, y, this.deltaX + boxLeft, this.deltaY + boxTop);
 		}
 		

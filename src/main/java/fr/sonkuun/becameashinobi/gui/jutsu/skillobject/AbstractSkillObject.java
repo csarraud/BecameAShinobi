@@ -1,17 +1,17 @@
-package fr.sonkuun.becameashinobi.gui.jutsu.items;
+package fr.sonkuun.becameashinobi.gui.jutsu.skillobject;
 
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
-public abstract class AbstractSkillItem {
+public abstract class AbstractSkillObject {
 
 	protected int x, y, width, height;
 	protected boolean isMouseOver;
 	protected ItemStack itemstack;
 	protected List<String> description;
 	
-	protected AbstractSkillItem(int x, int y, int width, int height) {
+	protected AbstractSkillObject(int x, int y, int width, int height) {
 
 		this.x = x;
 		this.y = y;

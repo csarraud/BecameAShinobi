@@ -1,4 +1,4 @@
-package fr.sonkuun.becameashinobi.gui.jutsu.items;
+package fr.sonkuun.becameashinobi.gui.jutsu.skillobject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class FireballSkillItem extends AbstractSkillItem {
+public class FireballSkillObject extends AbstractSkillObject {
 	
-	public FireballSkillItem(int x, int y, int width, int height) {
+	public FireballSkillObject(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
 
