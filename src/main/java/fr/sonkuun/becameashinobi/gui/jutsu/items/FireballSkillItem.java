@@ -10,9 +10,9 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class KatonActiveSkillItem extends AbstractSkillItem {
+public class FireballSkillItem extends AbstractSkillItem {
 	
-	public KatonActiveSkillItem(int x, int y, int width, int height) {
+	public FireballSkillItem(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
 

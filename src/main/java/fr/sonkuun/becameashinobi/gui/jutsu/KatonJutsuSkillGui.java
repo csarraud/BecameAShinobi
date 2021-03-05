@@ -1,7 +1,7 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
 import fr.sonkuun.becameashinobi.gui.jutsu.items.AbstractSkillItem;
-import fr.sonkuun.becameashinobi.gui.jutsu.items.KatonActiveSkillItem;
+import fr.sonkuun.becameashinobi.gui.jutsu.items.FireballSkillItem;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
@@ -14,7 +14,7 @@ public class KatonJutsuSkillGui extends AbstractJutsuGui {
 	@Override
 	protected void init() {
 		
-		this.skillItems.add(new KatonActiveSkillItem(20, 20, 20, 20));
+		this.skillItems.add(new FireballSkillItem(20, 20, 20, 20));
 		
 		super.init();
 	}
