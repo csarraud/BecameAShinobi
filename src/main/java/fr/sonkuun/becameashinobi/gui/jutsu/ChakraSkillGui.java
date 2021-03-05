@@ -33,11 +33,6 @@ public class ChakraSkillGui extends AbstractJutsuGui {
 	}
 
 	@Override
-	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
-
-	}
-
-	@Override
 	protected Color getFontColor() {
 		return new Color(100, 198, 198, 198);
 	}

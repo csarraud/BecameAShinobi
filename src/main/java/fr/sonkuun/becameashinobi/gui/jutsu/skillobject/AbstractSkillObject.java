@@ -11,7 +11,7 @@ public abstract class AbstractSkillObject {
 	protected ItemStack itemstack;
 	protected List<String> description;
 	
-	protected AbstractSkillObject(int x, int y, int width, int height) {
+	public AbstractSkillObject(int x, int y, int width, int height) {
 
 		this.x = x;
 		this.y = y;

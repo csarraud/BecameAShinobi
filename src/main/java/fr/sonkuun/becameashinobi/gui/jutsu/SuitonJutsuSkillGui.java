@@ -1,5 +1,6 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
+import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.suiton.WaterProjectionSkillObject;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
@@ -10,9 +11,11 @@ public class SuitonJutsuSkillGui extends AbstractJutsuGui {
 	}
 
 	@Override
-	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
-		// TODO Auto-generated method stub
+	protected void init() {
 		
+		this.skillObjects.add(new WaterProjectionSkillObject(20, 20, 20, 20));
+		
+		super.init();
 	}
 
 	@Override

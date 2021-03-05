@@ -81,7 +81,19 @@ public abstract class AbstractJutsuGui extends Screen {
         RenderSystem.disableDepthTest();
 	}
 
-    protected abstract void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight);
+    private void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
+
+		for(AbstractSkillObject skillItem : this.skillObjects) {
+			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
+		}
+		
+		for(AbstractSkillObject skillItem : this.skillObjects) {
+			if(skillItem.isMouseOver()) {
+				this.renderTooltip(skillItem.getDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
+			}
+		}
+    }
+    
     protected abstract Color getFontColor();
     
 	public void renderWindow(int left, int top, int right, int bottom) {
