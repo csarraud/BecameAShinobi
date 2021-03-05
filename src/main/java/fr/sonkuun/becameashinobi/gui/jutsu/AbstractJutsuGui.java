@@ -1,16 +1,16 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.geom.Rect;
+import fr.sonkuun.becameashinobi.gui.jutsu.items.AbstractSkillItem;
 import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
 import fr.sonkuun.becameashinobi.util.RenderUtil;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.gui.chat.NarratorChatListener;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -20,11 +20,15 @@ import net.minecraft.util.ResourceLocation;
 public abstract class AbstractJutsuGui extends Screen {
 
 	private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30;
-    private static final int SIDE = 20, TOP = 20, BOTTOM = 30, PADDING = 9;
+    protected static final int SIDE = 20, TOP = 20, BOTTOM = 30, PADDING = 9;
+    private static final int MIN_DELTA_X = -300, MIN_DELTA_Y = -300, MAX_DELTA_X = 100, MAX_DELTA_Y = 100;
     private static final float MIN_ZOOM = 1, MAX_ZOOM = 2, ZOOM_STEP = 0.2F;
-	private int internalHeight;
-	private int internalWidth;
-    private float zoom = MIN_ZOOM;
+	protected int internalHeight;
+	protected int internalWidth;
+    protected float zoom = MIN_ZOOM;
+    protected int deltaX = 0, deltaY = 0;
+    
+    protected List<AbstractSkillItem> skillItems = new ArrayList<AbstractSkillItem>();
 
 	protected AbstractJutsuGui(ClientAdvancementManager clientAdvancementManager) {
 		super(NarratorChatListener.EMPTY);
@@ -67,7 +71,11 @@ public abstract class AbstractJutsuGui extends Screen {
         RenderSystem.translated((float) (boxLeft), (float) (boxTop), 0.0F);
         RenderSystem.enableDepthTest();
         GlUtil.drawRect(new Rect(0, 0, insideWidth, insideHeight), this.getFontColor());
+
+		GlUtil.beginScissor(new Rect(boxLeft, boxTop, insideWidth, insideHeight));
         this.drawInside(boxLeft, boxTop, boxRight, boxBottom, insideWidth, insideHeight);
+        GlUtil.endScissor();
+        
         RenderSystem.popMatrix();
         RenderSystem.depthFunc(515);
         RenderSystem.disableDepthTest();
@@ -110,7 +118,19 @@ public abstract class AbstractJutsuGui extends Screen {
 	@Override
 	public boolean mouseDragged(double x, double y, int button,
 			double deltaX, double deltaY) {
-		// TODO Auto-generated method stub
+		
+		int newDeltaX = this.deltaX + (int)deltaX;
+		if(newDeltaX >= MIN_DELTA_X && newDeltaX <= MAX_DELTA_X) {
+			this.deltaX = newDeltaX;
+		}
+		
+		int newDeltaY = this.deltaY + (int)deltaY;
+		if(newDeltaY >= MIN_DELTA_Y && newDeltaY <= MAX_DELTA_Y) {
+			this.deltaY = newDeltaY;
+		}
+		
+		//System.out.println(String.format("[x = %s, y = %s, button = %s, deltaX = %s, deltaY = %s]",
+				//x, y, button, deltaX, deltaY));
 		return super.mouseDragged(x, y, button, deltaX, deltaY);
 	}
 
@@ -124,7 +144,21 @@ public abstract class AbstractJutsuGui extends Screen {
         }
 		return super.mouseScrolled(x, y, scroll);
 	}
-	
+
+	@Override
+	public void mouseMoved(double x, double y) {
+		int left = SIDE + (width - internalWidth) / 2;
+        int top = TOP + (height - internalHeight) / 2;
+		int boxLeft = left + PADDING;
+        int boxTop = top + 2*PADDING;
+		
+		for(AbstractSkillItem skillItem : skillItems) {
+			skillItem.isMouseOver(x, y, this.deltaX + boxLeft, this.deltaY + boxTop);
+		}
+		
+		super.mouseMoved(x, y);
+	}
+
 	@Override
 	public boolean isPauseScreen() {
 		return false;

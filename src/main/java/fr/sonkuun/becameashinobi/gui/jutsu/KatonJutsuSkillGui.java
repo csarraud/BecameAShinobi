@@ -1,5 +1,7 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
+import fr.sonkuun.becameashinobi.gui.jutsu.items.AbstractSkillItem;
+import fr.sonkuun.becameashinobi.gui.jutsu.items.KatonActiveSkillItem;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
@@ -10,8 +12,27 @@ public class KatonJutsuSkillGui extends AbstractJutsuGui {
 	}
 
 	@Override
-	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
+	protected void init() {
 		
+		this.skillItems.add(new KatonActiveSkillItem(20, 20, 20, 20));
+		
+		super.init();
+	}
+
+	@Override
+	protected void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
+		//System.out.println(String.format("[Zoom = %s, deltaX = %s, deltaY = %s]",
+				//this.zoom, this.deltaX, this.deltaY));
+		
+		for(AbstractSkillItem skillItem : this.skillItems) {
+			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
+		}
+		
+		for(AbstractSkillItem skillItem : this.skillItems) {
+			if(skillItem.isMouseOver()) {
+				this.renderTooltip(skillItem.getDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
+			}
+		}
 	}
 
 	@Override
