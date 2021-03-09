@@ -54,7 +54,7 @@ public class PlayerChooseElementalNatureGuiPacket {
 			 */
 			ServerPlayerEntity serverPlayer = supplier.get().getSender();
 			PlayerEntity clientPlayer = Minecraft.getInstance().world.getPlayerByUuid(message.getUuid());
-			System.out.println("HANDLE PACKET");
+
 			if(serverPlayer != null) {
 				/*
 				 * Do nothing
