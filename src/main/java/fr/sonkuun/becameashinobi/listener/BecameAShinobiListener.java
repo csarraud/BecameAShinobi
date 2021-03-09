@@ -11,12 +11,25 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BecameAShinobiListener {
+	
+	/*
+	 * When a player join server, check if he had already choose
+	 * his elemental nature and other abilities.
+	 */
+	@SubscribeEvent
+	public void onPlayerJoin(PlayerLoggedInEvent event) {
+		PlayerEntity player = event.getPlayer();
+		
+		
+	}
 	
 	/*
 	 * Used for debug purpose only
