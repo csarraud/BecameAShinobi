@@ -139,7 +139,7 @@ public class ChakraData {
 	public static final String CHAKRA_REGENERATION_FACTOR_NBT = "chakra_regeneration_factor";
 	public static final String CHAKRA_REGENERATION_TICK_NBT = "chakra_regeneration_tick";
 
-	public static class ShinobiWeaponDataNBTStorage implements Capability.IStorage<ChakraData> {
+	public static class ChakraDataNBTStorage implements Capability.IStorage<ChakraData> {
 
 		@Override
 		public INBT writeNBT(Capability<ChakraData> capability, ChakraData instance, Direction side) {

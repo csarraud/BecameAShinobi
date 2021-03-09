@@ -12,7 +12,7 @@ public class CapabilityBecameAShinobi {
 	public static void register() {
 		CapabilityManager.INSTANCE.register(
 				ChakraData.class,
-				new ChakraData.ShinobiWeaponDataNBTStorage(),
+				new ChakraData.ChakraDataNBTStorage(),
 				ChakraData::createADefaultInstance);
 	}
 }
