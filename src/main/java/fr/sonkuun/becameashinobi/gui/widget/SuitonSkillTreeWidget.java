@@ -1,5 +1,10 @@
 package fr.sonkuun.becameashinobi.gui.widget;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.gui.jutsu.SuitonJutsuSkillGui;
 import net.minecraft.client.Minecraft;
@@ -28,8 +33,12 @@ public class SuitonSkillTreeWidget extends AbstractSkillTreeWidget {
 	}
 
 	@Override
-	public String getScreenName() {
-		return "Suiton Skill Tree";
+	public List<String> getScreenName() {
+		List<String> list = new ArrayList<String>();
+		
+		list.add(ChatFormatting.BLUE + "Suiton skill tree");
+		
+		return list;
 	}
 
 	@Override

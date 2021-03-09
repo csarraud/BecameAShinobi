@@ -1,5 +1,7 @@
 package fr.sonkuun.becameashinobi.gui.widget;
 
+import java.util.List;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -46,7 +48,7 @@ public abstract class AbstractSkillTreeWidget extends Widget implements IToSkill
         return false;
     }
 	
-	public abstract String getScreenName();
+	public abstract List<String> getScreenName();
 	public abstract Screen getGuiToDisplay();
 	
 	public void bind(ResourceLocation resource) {
