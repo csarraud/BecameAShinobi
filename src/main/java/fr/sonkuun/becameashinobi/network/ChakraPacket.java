@@ -61,11 +61,11 @@ public class ChakraPacket {
 			PlayerEntity clientPlayer = Minecraft.getInstance().world.getPlayerByUuid(message.getUUID());
 			
 			if(serverPlayer != null) {
-				ChakraData data = serverPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
+				ChakraData data = serverPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
 				data.synchronize(message);
 			}
-			else if(clientPlayer != null && clientPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).isPresent()) {
-				ChakraData data = clientPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
+			else if(clientPlayer != null && clientPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
+				ChakraData data = clientPlayer.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
 				data.synchronize(message);
 			}
 		});

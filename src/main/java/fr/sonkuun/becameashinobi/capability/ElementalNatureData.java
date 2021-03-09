@@ -63,6 +63,27 @@ public class ElementalNatureData {
 	public void synchronize() {
 	}
 	
+	public int countLearnedElementalNature() {
+		int number = 0;
+		
+		if(this.katonLevel != 0)
+			number += 1;
+		
+		if(this.suitonLevel != 0)
+			number += 1;
+		
+		if(this.futonLevel != 0)
+			number += 1;
+		
+		if(this.raitonLevel != 0)
+			number += 1;
+		
+		if(this.dotonLevel != 0)
+			number += 1;
+		
+		return number;
+	}
+	
 	public static ElementalNatureData fromPacketBuffer(PacketBuffer buffer) {
 		return new ElementalNatureData();
 	}

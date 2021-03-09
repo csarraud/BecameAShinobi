@@ -35,7 +35,7 @@ public class BecameAShinobiHUD {
 		Minecraft mc = Minecraft.getInstance();
 		ClientPlayerEntity player = mc.player;
 
-		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).isPresent()) {
+		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
 			return;
 		}
 		
@@ -46,7 +46,7 @@ public class BecameAShinobiHUD {
 	}
 	
 	public void renderChakraBar(ClientPlayerEntity player) {
-		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI).orElse(null);
+		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
 		
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();

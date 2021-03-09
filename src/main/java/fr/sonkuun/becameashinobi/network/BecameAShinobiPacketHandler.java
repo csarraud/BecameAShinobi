@@ -18,9 +18,11 @@ public class BecameAShinobiPacketHandler {
 	private static int ID = 1;
 	
 	public static void register() {
-		ChakraPacket message = new ChakraPacket();
-		INSTANCE.registerMessage(ID++, ChakraPacket.class, message::encode, message::decode, message::handle);
+		ChakraPacket chakraPacket = new ChakraPacket();
+		PlayerChooseElementalNatureGuiPacket playerChooseElementalNatureGuiPacket = new PlayerChooseElementalNatureGuiPacket();
 		
+		INSTANCE.registerMessage(ID++, ChakraPacket.class, chakraPacket::encode, chakraPacket::decode, chakraPacket::handle);
+		INSTANCE.registerMessage(ID++, PlayerChooseElementalNatureGuiPacket.class, playerChooseElementalNatureGuiPacket::encode, playerChooseElementalNatureGuiPacket::decode, playerChooseElementalNatureGuiPacket::handle);
 	}
 	
 	

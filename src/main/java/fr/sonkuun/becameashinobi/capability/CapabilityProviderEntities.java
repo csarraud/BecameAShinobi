@@ -14,35 +14,46 @@ public class CapabilityProviderEntities implements ICapabilitySerializable<INBT>
 	private final Direction NO_SPECIFIC_SIDE = null;
 
 	private ChakraData chakraData = new ChakraData();
+	private ElementalNatureData elementalNatureData = new ElementalNatureData();
 
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
-		if (CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI == capability) {
+		if (CapabilityBecameAShinobi.CAPABILITY_CHAKRA == capability) {
 			return (LazyOptional<T>)LazyOptional.of(()-> chakraData);
+		}
+		else if(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE == capability) {
+			return (LazyOptional<T>)LazyOptional.of(()-> elementalNatureData);
 		}
 
 		return LazyOptional.empty();
 	}
 
 	private static final String CHAKRA_DATA_NBT = "chakra_data";
+	private static final String ELEMENTAL_NATURE_NBT = "elemental_nature";
 
 	@Override
 	public INBT serializeNBT() {
 		CompoundNBT nbt = new CompoundNBT();
 
-		INBT chakraDataNBT = CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI.writeNBT(chakraData, NO_SPECIFIC_SIDE);
-
+		INBT chakraDataNBT = CapabilityBecameAShinobi.CAPABILITY_CHAKRA.writeNBT(chakraData, NO_SPECIFIC_SIDE);
 		nbt.put(CHAKRA_DATA_NBT, chakraDataNBT);
+		
+		INBT elementalNatureDataNBT = CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE.writeNBT(elementalNatureData, NO_SPECIFIC_SIDE);
+		nbt.put(ELEMENTAL_NATURE_NBT, elementalNatureDataNBT);
+		
 		return nbt;
 	}
 
 	@Override
 	public void deserializeNBT(INBT nbt) {
 		CompoundNBT tag = (CompoundNBT) nbt;
-		INBT chakraDataNBT = tag.get(CHAKRA_DATA_NBT);
 		
-		CapabilityBecameAShinobi.CAPABILITY_BECAME_A_SHINOBI.readNBT(chakraData, NO_SPECIFIC_SIDE, chakraDataNBT);
+		INBT chakraDataNBT = tag.get(CHAKRA_DATA_NBT);
+		CapabilityBecameAShinobi.CAPABILITY_CHAKRA.readNBT(chakraData, NO_SPECIFIC_SIDE, chakraDataNBT);
+		
+		INBT elementalNatureDataNBT = tag.get(ELEMENTAL_NATURE_NBT);
+		CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE.readNBT(elementalNatureData, NO_SPECIFIC_SIDE, elementalNatureDataNBT);
 	}
 
 }
