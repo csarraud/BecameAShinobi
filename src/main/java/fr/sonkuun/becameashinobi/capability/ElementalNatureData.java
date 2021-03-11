@@ -1,5 +1,6 @@
 package fr.sonkuun.becameashinobi.capability;
 
+import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -82,6 +83,29 @@ public class ElementalNatureData {
 			number += 1;
 		
 		return number;
+	}
+	
+	public void addLevelToNature(ElementalNature nature, int amount) {
+		switch (nature) {
+		case KATON:
+			this.katonLevel += amount;
+			break;
+		case SUITON:
+			this.suitonLevel += amount;
+			break;
+		case FUTON:
+			this.futonLevel += amount;
+			break;
+		case RAITON:
+			this.raitonLevel += amount;
+			break;
+		case DOTON:
+			this.dotonLevel += amount;
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	public static ElementalNatureData fromPacketBuffer(PacketBuffer buffer) {

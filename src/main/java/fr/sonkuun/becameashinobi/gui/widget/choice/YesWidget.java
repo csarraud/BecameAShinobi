@@ -4,6 +4,8 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
+import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
+import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -47,11 +49,18 @@ public class YesWidget extends Widget {
         if (super.mouseClicked(mouseX, mouseY, modifiers)) {
         	ClientPlayerEntity player = Minecraft.getInstance().player;
         	
-        	
+        	this.learnElementalNatureToPlayer(player);
         	
             return true;
         }
         return false;
+    }
+    
+    public void learnElementalNatureToPlayer(ClientPlayerEntity player) {
+    	if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).isPresent()) {
+    		ElementalNatureData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).orElse(null);
+    		data.addLevelToNature(this.nature, 1);
+    	}
     }
 
 }
