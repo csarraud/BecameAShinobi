@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import fr.sonkuun.becameashinobi.elemental.ElementalNature;
+import fr.sonkuun.becameashinobi.gui.ValidationGui;
 import fr.sonkuun.becameashinobi.gui.widget.SuitonSkillTreeWidget;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 
 public class SuitonChoiceWidget extends SuitonSkillTreeWidget {
@@ -25,7 +28,7 @@ public class SuitonChoiceWidget extends SuitonSkillTreeWidget {
 
 	@Override
 	public Screen getGuiToDisplay() {
-		return null;
+		return new ValidationGui(ElementalNature.SUITON, this, Minecraft.getInstance().player.connection.getAdvancementManager());
 	}
 
 }

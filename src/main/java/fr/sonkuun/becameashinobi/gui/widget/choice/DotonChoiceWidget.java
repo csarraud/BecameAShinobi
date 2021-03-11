@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import fr.sonkuun.becameashinobi.elemental.ElementalNature;
+import fr.sonkuun.becameashinobi.gui.ValidationGui;
 import fr.sonkuun.becameashinobi.gui.widget.DotonSkillTreeWidget;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 
 public class DotonChoiceWidget extends DotonSkillTreeWidget {
@@ -25,7 +28,7 @@ public class DotonChoiceWidget extends DotonSkillTreeWidget {
 
 	@Override
 	public Screen getGuiToDisplay() {
-		return null;
+		return new ValidationGui(ElementalNature.DOTON, this, Minecraft.getInstance().player.connection.getAdvancementManager());
 	}
 
 }
