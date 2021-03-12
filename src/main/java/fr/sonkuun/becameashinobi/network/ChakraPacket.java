@@ -73,7 +73,4 @@ public class ChakraPacket {
 		supplier.get().setPacketHandled(true);
 
 	}
-
-
-
 }

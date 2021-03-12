@@ -7,12 +7,15 @@ import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
+import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
+import fr.sonkuun.becameashinobi.network.ElementalNaturePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class YesWidget extends Widget {
 
@@ -50,7 +53,7 @@ public class YesWidget extends Widget {
         	ClientPlayerEntity player = Minecraft.getInstance().player;
         	
         	this.learnElementalNatureToPlayer(player);
-        	
+            Minecraft.getInstance().displayGuiScreen(null);
             return true;
         }
         return false;
@@ -60,6 +63,7 @@ public class YesWidget extends Widget {
     	if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).isPresent()) {
     		ElementalNatureData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).orElse(null);
     		data.addLevelToNature(this.nature, 1);
+    		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new ElementalNaturePacket(player.getUniqueID(), data));
     	}
     }
 

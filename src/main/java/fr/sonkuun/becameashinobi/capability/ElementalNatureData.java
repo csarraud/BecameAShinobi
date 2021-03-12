@@ -1,6 +1,7 @@
 package fr.sonkuun.becameashinobi.capability;
 
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
+import fr.sonkuun.becameashinobi.network.ElementalNaturePacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -61,7 +62,14 @@ public class ElementalNatureData {
 		return this;
 	}
 
-	public void synchronize() {
+	public void synchronize(ElementalNaturePacket packet) {
+		ElementalNatureData data = packet.getElementalNatureData();
+		
+		this.katonLevel = data.getKatonLevel();
+		this.suitonLevel = data.getSuitonLevel();
+		this.futonLevel = data.getFutonLevel();
+		this.raitonLevel = data.getRaitonLevel();
+		this.dotonLevel = data.getDotonLevel();
 	}
 	
 	public int countLearnedElementalNature() {
@@ -109,7 +117,12 @@ public class ElementalNatureData {
 	}
 	
 	public static ElementalNatureData fromPacketBuffer(PacketBuffer buffer) {
-		return new ElementalNatureData();
+		return new ElementalNatureData()
+				.setKatonLevel(buffer.readInt())
+				.setSuitonLevel(buffer.readInt())
+				.setFutonLevel(buffer.readInt())
+				.setRaitonLevel(buffer.readInt())
+				.setDotonLevel(buffer.readInt());
 	}
 
 	public static final String KATON_LEVEL_NBT = "katon_level";
