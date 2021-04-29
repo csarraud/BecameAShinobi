@@ -36,7 +36,7 @@ public class FutonSkillTreeWidget extends AbstractSkillTreeWidget {
 	public List<String> getScreenName() {
 		List<String> list = new ArrayList<String>();
 		
-		list.add(ChatFormatting.GREEN + "Futon");
+		list.add(ChatFormatting.GREEN + "Futon skill tree");
 		
 		return list;
 	}

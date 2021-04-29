@@ -36,7 +36,7 @@ public class DotonSkillTreeWidget extends AbstractSkillTreeWidget {
 	public List<String> getScreenName() {
 		List<String> list = new ArrayList<String>();
 		
-		list.add(ChatFormatting.GRAY + "Doton");
+		list.add(ChatFormatting.GRAY + "Doton skill tree");
 		
 		return list;
 	}
