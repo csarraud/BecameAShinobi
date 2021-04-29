@@ -9,7 +9,6 @@ import fr.sonkuun.becameashinobi.BecameAShinobi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class AbstractSkillTreeWidget extends Widget implements IToSkillTreeWidget{

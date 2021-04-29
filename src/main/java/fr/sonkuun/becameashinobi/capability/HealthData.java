@@ -1,6 +1,5 @@
 package fr.sonkuun.becameashinobi.capability;
 
-import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import fr.sonkuun.becameashinobi.network.HealthPacket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
