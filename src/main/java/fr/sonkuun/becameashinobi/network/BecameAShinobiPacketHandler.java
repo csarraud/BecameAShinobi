@@ -19,10 +19,12 @@ public class BecameAShinobiPacketHandler {
 	
 	public static void register() {
 		ChakraPacket chakraPacket = new ChakraPacket();
+		HealthPacket healthPacket = new HealthPacket();
 		PlayerChooseElementalNatureGuiPacket playerChooseElementalNatureGuiPacket = new PlayerChooseElementalNatureGuiPacket();
 		ElementalNaturePacket elementalNaturePacket = new ElementalNaturePacket();
 		
 		INSTANCE.registerMessage(ID++, ChakraPacket.class, chakraPacket::encode, chakraPacket::decode, chakraPacket::handle);
+		INSTANCE.registerMessage(ID++, HealthPacket.class, healthPacket::encode, healthPacket::decode, healthPacket::handle);
 		INSTANCE.registerMessage(ID++, PlayerChooseElementalNatureGuiPacket.class, playerChooseElementalNatureGuiPacket::encode, playerChooseElementalNatureGuiPacket::decode, playerChooseElementalNatureGuiPacket::handle);
 		INSTANCE.registerMessage(ID++, ElementalNaturePacket.class, elementalNaturePacket::encode, elementalNaturePacket::decode, elementalNaturePacket::handle);
 	}

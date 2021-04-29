@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
+import fr.sonkuun.becameashinobi.capability.HealthData;
 import fr.sonkuun.becameashinobi.geom.Direction;
 import fr.sonkuun.becameashinobi.geom.Point;
 import fr.sonkuun.becameashinobi.geom.Rect;
@@ -50,6 +51,8 @@ public class BecameAShinobiHUD {
 	}
 	
 	public void renderHealthBar(ClientPlayerEntity player) {
+		HealthData healthData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+		
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();
 		
@@ -61,9 +64,11 @@ public class BecameAShinobiHUD {
 		 */
 		RenderSystem.enableAlphaTest();
 		RenderSystem.enableBlend();
+		
+		double healthPercentage = 100 * healthData.getHealth() / healthData.getMaxHealth();
 
 		GlUtil.drawRect(new Rect(left, top, 90, 9), new Color(100, 0, 0, 0));
-		GlUtil.drawRect(new Rect(left, top, 75, 9), new Color(255, 0, 0));
+		GlUtil.drawRect(new Rect(left, top, (int) (90 * healthPercentage / 100), 9), new Color(255, 0, 0));
 		GlUtil.drawBorderRect(new Rect(left, top, 90, 9), new Color(0, 0, 0));
 	}
 	

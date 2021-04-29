@@ -3,6 +3,7 @@ package fr.sonkuun.becameashinobi.listener;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
 import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
+import fr.sonkuun.becameashinobi.capability.HealthData;
 import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
@@ -49,6 +50,11 @@ public class BecameAShinobiListener {
 			data.useChakra(10);
 			PlayerEntity player = event.getPlayer();
 			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new ChakraPacket(player.getUniqueID(), data));
+		}
+		
+		if(event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			HealthData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			data.removeHealth(1);
 		}
 	}
 	/*
