@@ -35,8 +35,10 @@ public class HealthPacket {
 
 	public void encode(HealthPacket message, PacketBuffer buffer) {
 		buffer.writeUniqueId(message.getUUID());
-		buffer.writeDouble(message.getHealthData().getMaxHealth());
+		buffer.writeInt(message.getHealthData().getMaxHealth());
 		buffer.writeDouble(message.getHealthData().getExactHealth());
+		buffer.writeDouble(message.getHealthData().getHealthRegenerationPerSecond());
+		buffer.writeInt(message.getHealthData().getHealthRegenerationTick());
 	}
 
 	public HealthPacket decode(PacketBuffer buffer) {

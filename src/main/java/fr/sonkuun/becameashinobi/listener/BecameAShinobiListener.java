@@ -7,6 +7,7 @@ import fr.sonkuun.becameashinobi.capability.HealthData;
 import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
+import fr.sonkuun.becameashinobi.network.HealthPacket;
 import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -55,6 +56,8 @@ public class BecameAShinobiListener {
 		if(event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
 			HealthData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
 			data.removeHealth(1);
+			PlayerEntity player = event.getPlayer();
+			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new HealthPacket(player.getUniqueID(), data));
 		}
 	}
 	/*
@@ -75,12 +78,16 @@ public class BecameAShinobiListener {
 		
 		PlayerEntity player = event.player;
 		
-		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
-			return;
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
+			ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
+			
+			chakraData.updateChakra(player);
 		}
 		
-		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
-		
-		chakraData.updateChakra(player);
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			HealthData healthData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			
+			healthData.updateHealth(player);
+		}
 	}
 }
