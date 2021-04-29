@@ -7,6 +7,7 @@ import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ChakraData;
 import fr.sonkuun.becameashinobi.geom.Direction;
 import fr.sonkuun.becameashinobi.geom.Point;
+import fr.sonkuun.becameashinobi.geom.Rect;
 import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
 import net.minecraft.client.MainWindow;
@@ -18,6 +19,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @OnlyIn(Dist.CLIENT)
@@ -28,9 +30,11 @@ public class BecameAShinobiHUD {
 	
 	@SubscribeEvent
 	public void renderOverlay(RenderGameOverlayEvent.Pre event) {
-		if(event.getType() == ElementType.HEALTH) {
-			event.setCanceled(true);
+		if(event.getType() != ElementType.HEALTH) {
+			return;
 		}
+		
+		event.setCanceled(true);
 
 		Minecraft mc = Minecraft.getInstance();
 		ClientPlayerEntity player = mc.player;
@@ -46,7 +50,21 @@ public class BecameAShinobiHUD {
 	}
 	
 	public void renderHealthBar(ClientPlayerEntity player) {
+		AbstractGui gui = Minecraft.getInstance().ingameGUI;
+		MainWindow window = Minecraft.getInstance().getMainWindow();
 		
+		int left = window.getScaledWidth() / 2 - 91;
+		int top = window.getScaledHeight() - ForgeIngameGui.left_height;
+
+		/*
+		 * Allow transparency for the custom texture
+		 */
+		RenderSystem.enableAlphaTest();
+		RenderSystem.enableBlend();
+
+		GlUtil.drawRect(new Rect(left, top, 90, 9), new Color(100, 0, 0, 0));
+		GlUtil.drawRect(new Rect(left, top, 75, 9), new Color(255, 0, 0));
+		GlUtil.drawBorderRect(new Rect(left, top, 90, 9), new Color(0, 0, 0));
 	}
 	
 	@SubscribeEvent
