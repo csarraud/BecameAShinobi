@@ -27,6 +27,29 @@ public class BecameAShinobiHUD {
 	public static final ResourceLocation CHAKRA_TEXTURE = new ResourceLocation(BecameAShinobi.MODID, "textures/hud/chakra/chakra.png");
 	
 	@SubscribeEvent
+	public void renderOverlay(RenderGameOverlayEvent.Pre event) {
+		if(event.getType() == ElementType.HEALTH) {
+			event.setCanceled(true);
+		}
+
+		Minecraft mc = Minecraft.getInstance();
+		ClientPlayerEntity player = mc.player;
+
+		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			return;
+		}
+		
+		renderHealthBar(player);
+
+		RenderSystem.pushMatrix();
+		RenderSystem.popMatrix();
+	}
+	
+	public void renderHealthBar(ClientPlayerEntity player) {
+		
+	}
+	
+	@SubscribeEvent
 	public void renderOverlay(RenderGameOverlayEvent.Post event) {
 		if(event.getType() != ElementType.ALL) {
 			return;

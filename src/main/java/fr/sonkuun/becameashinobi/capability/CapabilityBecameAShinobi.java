@@ -8,6 +8,9 @@ public class CapabilityBecameAShinobi {
 	
 	@CapabilityInject(ChakraData.class)
 	public static Capability<ChakraData> CAPABILITY_CHAKRA = null;
+
+	@CapabilityInject(HealthData.class)
+	public static Capability<HealthData> CAPABILITY_HEALTH = null;
 	
 	@CapabilityInject(ElementalNatureData.class)
 	public static Capability<ElementalNatureData> CAPABILITY_ELEMENTAL_NATURE = null;
@@ -17,6 +20,11 @@ public class CapabilityBecameAShinobi {
 				ChakraData.class,
 				new ChakraData.ChakraDataNBTStorage(),
 				ChakraData::createADefaultInstance);
+
+		CapabilityManager.INSTANCE.register(
+				HealthData.class,
+				new HealthData.HealthDataNBTStorage(),
+				HealthData::createADefaultInstance);
 		
 		CapabilityManager.INSTANCE.register(
 				ElementalNatureData.class, 
