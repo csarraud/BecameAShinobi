@@ -18,20 +18,20 @@ public class HealthData {
 	
 	private int maxHealth;
 	private double health;
-	private double healthRegenerationPerSecond;
+	private double baseHealthRegenerationPerSecond;
 	private int healthRegenerationTick;
 	
 	public HealthData() {
 		this.maxHealth = 20;
 		this.health = 20.0;
-		this.healthRegenerationPerSecond = 0.5;
+		this.baseHealthRegenerationPerSecond = MathUtil.round(1 * this.maxHealth / 100, 1);
 		this.healthRegenerationTick = 0;
 	}
 	
 	public HealthData(HealthData data) {
 		this.maxHealth = data.getMaxHealth();
 		this.health = data.getExactHealth();
-		this.healthRegenerationPerSecond = data.getHealthRegenerationPerSecond();
+		this.baseHealthRegenerationPerSecond = data.getBaseHealthRegenerationPerSecond();
 		this.healthRegenerationTick = data.getHealthRegenerationTick();
 	}
 	
@@ -47,8 +47,8 @@ public class HealthData {
 		return this;
 	}
 	
-	public HealthData setHealthRegenerationPerSecond(double value) {
-		this.healthRegenerationPerSecond = value;
+	public HealthData setBaseHealthRegenerationPerSecond(double value) {
+		this.baseHealthRegenerationPerSecond = value;
 		
 		return this;
 	}
@@ -66,7 +66,7 @@ public class HealthData {
 	
 	public void regenerateHealth() {
 		if(this.healthRegenerationTick >= NB_TICKS_PER_SECOND) {
-			this.addHealth(MathUtil.round(this.healthRegenerationPerSecond, 1));
+			this.addHealth(MathUtil.round(this.baseHealthRegenerationPerSecond, 1));
 			this.healthRegenerationTick = 0;
 		}
 		else {
@@ -97,7 +97,7 @@ public class HealthData {
 		
 		this.maxHealth = data.getMaxHealth();
 		this.health = data.getExactHealth();
-		this.healthRegenerationPerSecond = data.getHealthRegenerationPerSecond();
+		this.baseHealthRegenerationPerSecond = data.getBaseHealthRegenerationPerSecond();
 		this.healthRegenerationTick = data.getHealthRegenerationTick();
 	}
 	
@@ -105,7 +105,7 @@ public class HealthData {
 		return new HealthData()
 				.setMaxHealth(buffer.readInt())
 				.setHealth(buffer.readDouble())
-				.setHealthRegenerationPerSecond(buffer.readDouble())
+				.setBaseHealthRegenerationPerSecond(buffer.readDouble())
 				.setHealthRegenerationTick(buffer.readInt());
 	}
 	
@@ -122,7 +122,7 @@ public class HealthData {
 
 			tag.putInt(MAX_HEALTH_NBT, instance.maxHealth);
 			tag.putDouble(HEALTH_NBT, instance.health);
-			tag.putDouble(HEALTH_REGENERATION_PER_SECOND_NBT, instance.healthRegenerationPerSecond);
+			tag.putDouble(HEALTH_REGENERATION_PER_SECOND_NBT, instance.baseHealthRegenerationPerSecond);
 			tag.putInt(HEALTH_REGENERATION_TICK_NBT, instance.healthRegenerationTick);
 
 			return tag;
@@ -136,7 +136,7 @@ public class HealthData {
 
 				instance.setMaxHealth(tag.getInt(MAX_HEALTH_NBT));
 				instance.setHealth(tag.getDouble(HEALTH_NBT));
-				instance.setHealthRegenerationPerSecond(tag.getDouble(HEALTH_REGENERATION_PER_SECOND_NBT));
+				instance.setBaseHealthRegenerationPerSecond(tag.getDouble(HEALTH_REGENERATION_PER_SECOND_NBT));
 				instance.setHealthRegenerationTick(tag.getInt(HEALTH_REGENERATION_TICK_NBT));
 			}
 		}
@@ -159,8 +159,8 @@ public class HealthData {
 		return (int) health;
 	}
 	
-	public double getHealthRegenerationPerSecond() {
-		return healthRegenerationPerSecond;
+	public double getBaseHealthRegenerationPerSecond() {
+		return baseHealthRegenerationPerSecond;
 	}
 	
 	public int getHealthRegenerationTick() {

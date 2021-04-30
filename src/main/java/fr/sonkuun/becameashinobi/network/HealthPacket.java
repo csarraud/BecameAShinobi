@@ -37,7 +37,7 @@ public class HealthPacket {
 		buffer.writeUniqueId(message.getUUID());
 		buffer.writeInt(message.getHealthData().getMaxHealth());
 		buffer.writeDouble(message.getHealthData().getExactHealth());
-		buffer.writeDouble(message.getHealthData().getHealthRegenerationPerSecond());
+		buffer.writeDouble(message.getHealthData().getBaseHealthRegenerationPerSecond());
 		buffer.writeInt(message.getHealthData().getHealthRegenerationTick());
 	}
 
