@@ -66,7 +66,7 @@ public class HealthData {
 	
 	public void regenerateHealth() {
 		if(this.healthRegenerationTick >= NB_TICKS_PER_SECOND) {
-			this.addHealth(MathUtil.round(this.baseHealthRegenerationPerSecond, 1));
+			this.addHealth(this.getTotalRegenerationHealth());
 			this.healthRegenerationTick = 0;
 		}
 		else {
@@ -161,6 +161,16 @@ public class HealthData {
 	
 	public double getBaseHealthRegenerationPerSecond() {
 		return baseHealthRegenerationPerSecond;
+	}
+	
+	public double getTotalRegenerationHealth() {
+		double value = this.baseHealthRegenerationPerSecond;
+		
+		/*
+		 * TODO : implement additional health regeneration
+		 */
+		
+		return MathUtil.round(value, 1);
 	}
 	
 	public int getHealthRegenerationTick() {
