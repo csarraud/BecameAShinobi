@@ -10,11 +10,15 @@ import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import fr.sonkuun.becameashinobi.network.HealthPacket;
 import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -88,6 +92,25 @@ public class BecameAShinobiListener {
 			HealthData healthData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
 			
 			healthData.updateHealth(player);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityIsHurted(LivingDamageEvent event) {
+		DamageSource source = event.getSource();
+		LivingEntity victim = event.getEntityLiving();
+		
+		/* Player damage living entity */
+		if(source.getTrueSource() instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) source.getTrueSource();
+			
+			
+		}
+		/* Living entity damage player*/
+		else if(source.getTrueSource() instanceof LivingEntity && victim instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) victim;
+			
+			
 		}
 	}
 }
