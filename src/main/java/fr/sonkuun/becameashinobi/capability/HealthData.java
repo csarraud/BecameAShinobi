@@ -3,6 +3,7 @@ package fr.sonkuun.becameashinobi.capability;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.HealthPacket;
 import fr.sonkuun.becameashinobi.util.MathUtil;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -61,7 +62,7 @@ public class HealthData {
 	
 	public void updateHealth(PlayerEntity player) {
 		regenerateHealth();
-		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new HealthPacket(player.getUniqueID(), this));
+		this.sendDataToClient(player);
 	}
 	
 	public void regenerateHealth() {
@@ -83,13 +84,21 @@ public class HealthData {
 		}
 	}
 	
-	public void removeHealth(int amount) {
+	public void removeHealth(double amount) {
 		if(this.health <= amount) {
 			this.health = 0.0;
 		}
 		else {
 			this.health -= amount;
 		}
+	}
+	
+	public void sendDataToClient(PlayerEntity player) {
+		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new HealthPacket(player.getUniqueID(), this));
+	}
+	
+	public void sendDataToAllClient(Entity entity) {
+		BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new HealthPacket(entity.getUniqueID(), this));
 	}
 	
 	public void synchronize(HealthPacket packet) {

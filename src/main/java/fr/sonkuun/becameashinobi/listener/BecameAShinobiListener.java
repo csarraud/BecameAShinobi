@@ -9,6 +9,7 @@ import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ChakraPacket;
 import fr.sonkuun.becameashinobi.network.HealthPacket;
 import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -95,6 +96,11 @@ public class BecameAShinobiListener {
 		}
 	}
 	
+	/*
+	 * Override damage event
+	 * 
+	 * This event is server side
+	 */
 	@SubscribeEvent
 	public void onEntityIsHurted(LivingDamageEvent event) {
 		DamageSource source = event.getSource();
@@ -104,13 +110,41 @@ public class BecameAShinobiListener {
 		if(source.getTrueSource() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) source.getTrueSource();
 			
-			
+			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
+					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+				event.setCanceled(true);
+				
+				float damage = event.getAmount();
+				
+				HealthData livingEntityData = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+				
+				livingEntityData.removeHealth((double) damage);
+				livingEntityData.sendDataToAllClient(victim);
+				
+				if(livingEntityData.getExactHealth() == 0.0) {
+					victim.setHealth(0.0f);
+				}
+			}
 		}
 		/* Living entity damage player*/
 		else if(source.getTrueSource() instanceof LivingEntity && victim instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) victim;
 			
-			
+			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
+					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+				event.setCanceled(true);
+				
+				float damage = event.getAmount();
+				
+				HealthData playerData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+				
+				playerData.removeHealth((double) damage);
+				playerData.sendDataToClient(player);
+				
+				if(playerData.getExactHealth() == 0.0) {
+					player.setHealth(0.0f);
+				}
+			}
 		}
 	}
 }
