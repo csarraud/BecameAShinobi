@@ -11,11 +11,18 @@ import fr.sonkuun.becameashinobi.geom.Point;
 import fr.sonkuun.becameashinobi.geom.Rect;
 import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
+import fr.sonkuun.becameashinobi.util.RayTraceUtil;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -58,18 +65,22 @@ public class BecameAShinobiHUD {
 		
 		int left = window.getScaledWidth() / 2 - 91;
 		int top = window.getScaledHeight() - ForgeIngameGui.left_height;
+		
+		double healthPercentage = 100 * healthData.getHealth() / healthData.getMaxHealth();
 
+		drawHealthBar(left, top, 90, 9, healthPercentage);
+	}
+	
+	public void drawHealthBar(int x, int y, int width, int height, double percentage) {
 		/*
 		 * Allow transparency for the custom texture
 		 */
 		RenderSystem.enableAlphaTest();
 		RenderSystem.enableBlend();
 		
-		double healthPercentage = 100 * healthData.getHealth() / healthData.getMaxHealth();
-
-		GlUtil.drawRect(new Rect(left, top, 90, 9), new Color(100, 0, 0, 0));
-		GlUtil.drawRect(new Rect(left, top, (int) (90 * healthPercentage / 100), 9), new Color(255, 0, 0));
-		GlUtil.drawBorderRect(new Rect(left, top, 90, 9), new Color(0, 0, 0));
+		GlUtil.drawRect(new Rect(x, y, width, height), new Color(100, 0, 0, 0));
+		GlUtil.drawRect(new Rect(x, y, (int) (width * percentage / 100), height), new Color(255, 0, 0));
+		GlUtil.drawBorderRect(new Rect(x, y, width, height), new Color(0, 0, 0));
 	}
 	
 	@SubscribeEvent
@@ -89,6 +100,8 @@ public class BecameAShinobiHUD {
 
 		RenderSystem.pushMatrix();
 		RenderSystem.popMatrix();
+		
+		renderEntityDataPlayerIsLookingAt(player);
 	}
 	
 	public void renderChakraBar(ClientPlayerEntity player) {
@@ -129,6 +142,28 @@ public class BecameAShinobiHUD {
 		GlUtil.scale(4f);
 		
 		bind(AbstractGui.GUI_ICONS_LOCATION);
+	}
+	
+	public void renderEntityDataPlayerIsLookingAt(ClientPlayerEntity player) {
+		Entity entity = RayTraceUtil.getMouseOver(player, 10, 0.0f);
+		if(entity != null && entity instanceof LivingEntity) {
+			LivingEntity livingEntity = (LivingEntity) entity;
+			
+			if(livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+				HealthData data = livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+				
+				double healthPercentage = 100 * data.getHealth() / data.getMaxHealth();
+				
+				GlUtil.drawTooltipBox(new Rect(1, 1, 70, 18));
+				
+				GlUtil.scale(0.5f);
+				GlUtil.drawString(livingEntity.getName().getString(), new Point(12, 14), Direction.WEST, new Color(255, 255, 255));
+				GlUtil.scale(2f);
+				
+				drawHealthBar(5, 9, 60, 6, healthPercentage);
+			}
+		}
+		
 	}
 
 	public void bind(ResourceLocation texture) {
