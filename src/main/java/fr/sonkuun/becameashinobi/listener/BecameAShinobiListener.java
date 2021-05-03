@@ -112,7 +112,6 @@ public class BecameAShinobiListener {
 			
 			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
 					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
-				event.setCanceled(true);
 				
 				float damage = event.getAmount();
 				
@@ -124,6 +123,10 @@ public class BecameAShinobiListener {
 				if(livingEntityData.getExactHealth() == 0.0) {
 					victim.setHealth(0.0f);
 				}
+				else {
+					event.setCanceled(true);
+					victim.setHealth(victim.getMaxHealth());
+				}
 			}
 		}
 		/* Living entity damage player*/
@@ -132,7 +135,6 @@ public class BecameAShinobiListener {
 			
 			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
 					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
-				event.setCanceled(true);
 				
 				float damage = event.getAmount();
 				
@@ -144,7 +146,82 @@ public class BecameAShinobiListener {
 				if(playerData.getExactHealth() == 0.0) {
 					player.setHealth(0.0f);
 				}
+				else {
+					event.setCanceled(true);
+					victim.setHealth(victim.getMaxHealth());
+				}
 			}
 		}
+		/* Player is hurted by environment */
+		else if(victim instanceof PlayerEntity) {
+			
+			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+				return;
+			}
+			
+			HealthData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			double damage = getDamageFromSource(source, victim);
+			
+			/* If damage isn't override, return */
+			if(damage == Double.NaN) {
+				return;
+			}
+			
+			data.removeHealth(damage);
+			data.sendDataToAllClient(victim);
+			
+			if(data.getExactHealth() == 0.0) {
+				victim.setHealth(0.0f);
+			}
+			else {
+				event.setCanceled(true);
+				victim.setHealth(victim.getMaxHealth());
+			}
+		}
+		/* Living entity is hurted by environment */
+		else {
+			
+			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+				return;
+			}
+			
+			HealthData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			double damage = getDamageFromSource(source, victim);
+			
+			/* If damage isn't override, return */
+			if(damage == Double.NaN) {
+				return;
+			}
+			
+			data.removeHealth(damage);
+			data.sendDataToAllClient(victim);
+			
+			if(data.getExactHealth() == 0.0) {
+				victim.setHealth(0.0f);
+			}
+			else {
+				event.setCanceled(true);
+				victim.setHealth(victim.getMaxHealth());
+			}
+		}
+	}
+	
+	/*
+	 * Return a custom value for every natural damage
+	 * 
+	 * If the damage isn't override, return NaN
+	 */
+	public double getDamageFromSource(DamageSource source, LivingEntity entity) {		
+		HealthData data = entity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+		int maxHealth = data.getMaxHealth();
+		
+		if(source.equals(DamageSource.LAVA)) {
+			return maxHealth * 5 / 100.0;
+		}
+		else if(source.equals(DamageSource.DROWN)) {
+			return maxHealth * 5 / 100.0;
+		}
+		
+		return Double.NaN;
 	}
 }
