@@ -68,7 +68,7 @@ public class BecameAShinobiHUD {
 		
 		double healthPercentage = 100 * healthData.getHealth() / healthData.getMaxHealth();
 
-		drawHealthBar(left, top, 90, 9, healthPercentage);
+		drawHealthBar(left, top, 80, 9, healthPercentage);
 	}
 	
 	public void drawHealthBar(int x, int y, int width, int height, double percentage) {
