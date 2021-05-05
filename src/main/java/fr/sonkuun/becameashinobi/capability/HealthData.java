@@ -25,7 +25,7 @@ public class HealthData {
 	public HealthData() {
 		this.maxHealth = 20;
 		this.health = 20.0;
-		this.baseHealthRegenerationPerSecond = MathUtil.round(1 * this.maxHealth / 100, 1);
+		this.baseHealthRegenerationPerSecond = MathUtil.round(1 * this.maxHealth / 100.0, 1);
 		this.healthRegenerationTick = 0;
 	}
 	
