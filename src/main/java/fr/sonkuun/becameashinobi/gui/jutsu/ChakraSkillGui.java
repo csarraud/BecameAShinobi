@@ -17,11 +17,11 @@ public class ChakraSkillGui extends AbstractJutsuGui {
 	@Override
 	protected void init() {
 		
-		this.addButton(new KatonSkillTreeWidget(250, 100, "KATON"));
-		this.addButton(new SuitonSkillTreeWidget(200, 150, "SUITON"));
-		this.addButton(new FutonSkillTreeWidget(300, 150, "FUTON"));
-		this.addButton(new RaitonSkillTreeWidget(280, 200, "RAITON"));
-		this.addButton(new DotonSkillTreeWidget(230, 200, "DOTON"));
+		this.addButton(new KatonSkillTreeWidget(5, -35, "KATON"));
+		this.addButton(new SuitonSkillTreeWidget(-40, 0, "SUITON"));
+		this.addButton(new FutonSkillTreeWidget(50, 0, "FUTON"));
+		this.addButton(new RaitonSkillTreeWidget(35, 45, "RAITON"));
+		this.addButton(new DotonSkillTreeWidget(-25, 45, "DOTON"));
 		
 		super.init();
 		

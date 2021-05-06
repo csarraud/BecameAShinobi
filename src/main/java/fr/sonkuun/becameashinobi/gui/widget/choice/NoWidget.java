@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 import fr.sonkuun.becameashinobi.gui.ChooseElementalNatureGui;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.item.ItemStack;
@@ -27,11 +28,16 @@ public class NoWidget extends Widget {
         if (this.visible)
         {
             Minecraft mc  = Minecraft.getInstance();
+    		MainWindow window = mc.getMainWindow();
+            
+            int x = (window.getScaledWidth() / 2) + this.x;
+            int y = (window.getScaledHeight() / 2) + this.y;
+            
             mc.getTextureManager().bindTexture(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
-            this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-            this.blit(this.x, this.y, 56, 0, 28, 32);
+            this.isHovered = mouseX >= x && mouseY >= y && mouseX < x + this.width && mouseY < y + this.height;
+            this.blit(x, y, 56, 0, 28, 32);
 
-            mc.getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(Items.RED_DYE), this.x + 6, this.y + 10);
+            mc.getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(Items.RED_DYE), x + 6, y + 10);
             
             if (this.isHovered) {
                 mc.currentScreen.renderTooltip(this.getMessage(), mouseX, mouseY);
@@ -44,7 +50,16 @@ public class NoWidget extends Widget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int modifiers) {
-        if (super.mouseClicked(mouseX, mouseY, modifiers)) {
+
+        Minecraft mc  = Minecraft.getInstance();
+		MainWindow window = mc.getMainWindow();
+        
+        int x = (window.getScaledWidth() / 2) + this.x;
+        int y = (window.getScaledHeight() / 2) + this.y;
+        
+    	boolean clicked = mouseX >= x && mouseX <= (x + this.width) && mouseY >= y && mouseY <=(y + this.height);
+    			
+        if (clicked) {
             Minecraft.getInstance().displayGuiScreen(new ChooseElementalNatureGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
             return true;
         }
