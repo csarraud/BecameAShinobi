@@ -1,20 +1,15 @@
 package fr.sonkuun.becameashinobi.listener;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
-import fr.sonkuun.becameashinobi.capability.ChakraData;
 import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
-import fr.sonkuun.becameashinobi.capability.HealthData;
+import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
-import fr.sonkuun.becameashinobi.network.ChakraPacket;
-import fr.sonkuun.becameashinobi.network.HealthPacket;
 import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
@@ -51,18 +46,13 @@ public class BecameAShinobiListener {
 	 */
 	@SubscribeEvent
 	public void interact(PlayerInteractEvent event) {
-		if(event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
-			ChakraData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
-			data.useChakra(10);
-			PlayerEntity player = event.getPlayer();
-			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new ChakraPacket(player.getUniqueID(), data));
-		}
 		
-		if(event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
-			HealthData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+		if(event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			ShinobiData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+			data.useChakra(10);
 			data.removeHealth(1);
 			PlayerEntity player = event.getPlayer();
-			BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new HealthPacket(player.getUniqueID(), data));
+			data.sendDataToServer(player);
 		}
 	}
 	/*
@@ -83,16 +73,10 @@ public class BecameAShinobiListener {
 		
 		PlayerEntity player = event.player;
 		
-		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
-			ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
-			
-			chakraData.updateChakra(player);
-		}
-		
-		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
-			HealthData healthData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
-			
-			healthData.updateHealth(player);
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+			data.updateChakra(player);
+			data.updateHealth(player);
 		}
 	}
 	
@@ -110,12 +94,12 @@ public class BecameAShinobiListener {
 		if(source.getTrueSource() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) source.getTrueSource();
 			
-			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
-					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()
+					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 				
 				float damage = event.getAmount();
 				
-				HealthData livingEntityData = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+				ShinobiData livingEntityData = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 				
 				livingEntityData.removeHealth((double) damage);
 				livingEntityData.sendDataToAllClient(victim);
@@ -133,12 +117,12 @@ public class BecameAShinobiListener {
 		else if(source.getTrueSource() instanceof LivingEntity && victim instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) victim;
 			
-			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()
-					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()
+					&& victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 				
 				float damage = event.getAmount();
 				
-				HealthData playerData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+				ShinobiData playerData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 				
 				playerData.removeHealth((double) damage);
 				playerData.sendDataToClient(player);
@@ -155,11 +139,11 @@ public class BecameAShinobiListener {
 		/* Player is hurted by environment */
 		else if(victim instanceof PlayerEntity) {
 			
-			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 				return;
 			}
 			
-			HealthData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			ShinobiData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 			double damage = getDamageFromSource(source, victim);
 			
 			/* If damage isn't override, return */
@@ -181,11 +165,11 @@ public class BecameAShinobiListener {
 		/* Living entity is hurted by environment */
 		else {
 			
-			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+			if(!victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 				return;
 			}
 			
-			HealthData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			ShinobiData data = victim.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 			double damage = getDamageFromSource(source, victim);
 			
 			/* If damage isn't override, return */
@@ -212,7 +196,7 @@ public class BecameAShinobiListener {
 	 * If the damage isn't override, return NaN
 	 */
 	public double getDamageFromSource(DamageSource source, LivingEntity entity) {		
-		HealthData data = entity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+		ShinobiData data = entity.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 		int maxHealth = data.getMaxHealth();
 		
 		if(source.equals(DamageSource.LAVA)) {

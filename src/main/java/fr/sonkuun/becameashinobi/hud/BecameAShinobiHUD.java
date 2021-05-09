@@ -4,8 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
-import fr.sonkuun.becameashinobi.capability.ChakraData;
-import fr.sonkuun.becameashinobi.capability.HealthData;
+import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.geom.Direction;
 import fr.sonkuun.becameashinobi.geom.Point;
 import fr.sonkuun.becameashinobi.geom.Rect;
@@ -47,7 +46,7 @@ public class BecameAShinobiHUD {
 		Minecraft mc = Minecraft.getInstance();
 		ClientPlayerEntity player = mc.player;
 
-		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
+		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 			return;
 		}
 		
@@ -58,7 +57,7 @@ public class BecameAShinobiHUD {
 	}
 	
 	public void renderHealthBar(ClientPlayerEntity player) {
-		HealthData healthData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+		ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 		
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();
@@ -66,7 +65,7 @@ public class BecameAShinobiHUD {
 		int left = window.getScaledWidth() / 2 - 91;
 		int top = window.getScaledHeight() - ForgeIngameGui.left_height;
 		
-		double healthPercentage = 100 * healthData.getHealth() / healthData.getMaxHealth();
+		double healthPercentage = 100 * data.getHealth() / data.getMaxHealth();
 
 		drawHealthBar(left, top, 80, 9, healthPercentage);
 	}
@@ -92,7 +91,7 @@ public class BecameAShinobiHUD {
 		Minecraft mc = Minecraft.getInstance();
 		ClientPlayerEntity player = mc.player;
 
-		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).isPresent()) {
+		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 			return;
 		}
 		
@@ -105,7 +104,7 @@ public class BecameAShinobiHUD {
 	}
 	
 	public void renderChakraBar(ClientPlayerEntity player) {
-		ChakraData chakraData = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_CHAKRA).orElse(null);
+		ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 		
 		AbstractGui gui = Minecraft.getInstance().ingameGUI;
 		MainWindow window = Minecraft.getInstance().getMainWindow();
@@ -119,11 +118,11 @@ public class BecameAShinobiHUD {
 		int posX = (int) ((width * (4.0 / window.getGuiScaleFactor()) - textureWidth));
 		int posY = (int) (((height - textureHeight) / 2) * (4.0 / window.getGuiScaleFactor()));
 
-		double chakraPercent = chakraData.getChakraValue() / chakraData.getChakraMaxValue();
+		double chakraPercent = data.getChakraValue() / data.getChakraMaxValue();
 		int chakraProgress = (int) (textureHeight - textureHeight * chakraPercent);
 		
 		GlUtil.scale(0.5f);
-		GlUtil.drawString(Double.toString(chakraData.getChakraValue()), new Point(posX + (int) (textureWidth * 0.73), posY - 10).scale(0.5f), Direction.CENTER, new Color(129, 189, 249));
+		GlUtil.drawString(Double.toString(data.getChakraValue()), new Point(posX + (int) (textureWidth * 0.73), posY - 10).scale(0.5f), Direction.CENTER, new Color(129, 189, 249));
 		GlUtil.scale(2f);
 		
 		GlUtil.scale(0.25f);
@@ -149,8 +148,8 @@ public class BecameAShinobiHUD {
 		if(entity != null && entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 			
-			if(livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).isPresent()) {
-				HealthData data = livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_HEALTH).orElse(null);
+			if(livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+				ShinobiData data = livingEntity.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 				
 				double healthPercentage = 100 * data.getHealth() / data.getMaxHealth();
 				
