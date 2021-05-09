@@ -1,4 +1,4 @@
-package fr.sonkuun.becameashinobi.gui.widget;
+package fr.sonkuun.becameashinobi.gui.widget.common;
 
 import java.util.List;
 

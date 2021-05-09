@@ -3,7 +3,7 @@ package fr.sonkuun.becameashinobi.listener;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
-import fr.sonkuun.becameashinobi.gui.widget.JutsuTreeGuiWidget;
+import fr.sonkuun.becameashinobi.gui.widget.common.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
