@@ -57,13 +57,6 @@ public class ShinobiData {
 		this.health = data.getExactHealth();
 		this.baseHealthRegenerationPerSecond = data.getBaseHealthRegenerationPerSecond();
 		this.healthRegenerationTick = data.getHealthRegenerationTick();
-
-		this.chakraMaxValue = 100;
-		this.chakraValue = 0;
-		this.baseChakraRegenerationPerSecond = 1.0;
-		this.chakraRegenerationPerSecond = 1.0;
-		this.chakraRegenerationFactor = 100;
-		this.chakraRegenerationTick = 0;
 		
 		this.chakraMaxValue = data.getChakraMaxValue();
 		this.chakraValue = data.getChakraValue();
@@ -156,6 +149,11 @@ public class ShinobiData {
 	
 	public void synchronize(ShinobiPacket packet) {
 		ShinobiData data = packet.getShinobiData();
+		
+		this.maxHealth = data.getMaxHealth();
+		this.health = data.getExactHealth();
+		this.baseHealthRegenerationPerSecond = data.getBaseHealthRegenerationPerSecond();
+		this.healthRegenerationTick = data.getHealthRegenerationTick();
 		
 		this.chakraMaxValue = data.getChakraMaxValue();
 		this.chakraValue = data.getChakraValue();

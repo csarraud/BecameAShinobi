@@ -66,10 +66,10 @@ public class ShinobiPacket {
 			
 			/*
 			 * If serverPlayer isn't null, then the packet is from CLIENT to SERVER.
-			 * In our case, the client health has been updated and inform the server
+			 * In our case, the client health / chakra has been updated and inform the server
 			 * 
 			 * Else the packet is from SERVER to CLIENT.
-			 * In our case, the server inform the client it health value has been modified
+			 * In our case, the server inform the client it health / chakra value has been modified
 			 */
 			ServerPlayerEntity serverPlayer = supplier.get().getSender();
 			PlayerEntity clientPlayer = Minecraft.getInstance().world.getPlayerByUuid(message.getUUID());
