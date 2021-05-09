@@ -3,7 +3,7 @@ package fr.sonkuun.becameashinobi.gui;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
-import fr.sonkuun.becameashinobi.gui.jutsu.AbstractJutsuGui;
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.widget.choice.NoWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.YesWidget;
 import fr.sonkuun.becameashinobi.util.Color;

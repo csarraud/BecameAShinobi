@@ -1,5 +1,6 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.widget.DotonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.gui.widget.FutonSkillTreeWidget;
 import fr.sonkuun.becameashinobi.gui.widget.KatonSkillTreeWidget;

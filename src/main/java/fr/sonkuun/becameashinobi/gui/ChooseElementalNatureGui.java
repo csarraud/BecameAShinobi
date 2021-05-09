@@ -1,6 +1,6 @@
 package fr.sonkuun.becameashinobi.gui;
 
-import fr.sonkuun.becameashinobi.gui.jutsu.AbstractJutsuGui;
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.widget.choice.DotonChoiceWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.FutonChoiceWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.KatonChoiceWidget;

@@ -1,4 +1,4 @@
-package fr.sonkuun.becameashinobi.gui.jutsu;
+package fr.sonkuun.becameashinobi.gui.jutsu.common;
 
 import java.util.ArrayList;
 import java.util.List;
