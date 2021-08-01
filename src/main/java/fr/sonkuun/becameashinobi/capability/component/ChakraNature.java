@@ -23,13 +23,17 @@ public class ChakraNature {
 		this.futon = new FutonNature();
 	}
 	
-	public ChakraNature(ChakraNature chakraNature) {
+	public ChakraNature(KatonNature katon, SuitonNature suiton, DotonNature doton, RaitonNature raiton, FutonNature futon) {
 		
-		this.katon = new KatonNature(chakraNature.getKaton());
-		this.suiton = new SuitonNature(chakraNature.getSuiton());
-		this.doton = new DotonNature(chakraNature.getDoton());
-		this.raiton = new RaitonNature(chakraNature.getRaiton());
-		this.futon = new FutonNature(chakraNature.getFuton());
+		this.katon = katon;
+		this.suiton = suiton;
+		this.doton = doton;
+		this.raiton = raiton;
+		this.futon = futon;
+	}
+	
+	public ChakraNature(ChakraNature chakraNature) {
+		this(chakraNature.getKaton(), chakraNature.getSuiton(), chakraNature.getDoton(), chakraNature.getRaiton(), chakraNature.getFuton());
 	}
 
 	public KatonNature getKaton() {

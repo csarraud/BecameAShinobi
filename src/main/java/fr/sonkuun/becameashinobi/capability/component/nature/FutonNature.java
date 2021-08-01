@@ -6,14 +6,14 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class FutonNature extends AbstractNature {
 
 	public FutonNature() {
-		super(ElementalNature.FUTON, 0, 0);
+		this(0, 0);
 	}
 	
 	public FutonNature(FutonNature futonNature) {
-		super(ElementalNature.FUTON, futonNature.getLevel(), futonNature.getXp());
+		this(futonNature.getLevel(), futonNature.getXp());
 	}
 	
-	public FutonNature(ElementalNature nature, int level, int xp) {
-		super(nature, level, xp);
+	public FutonNature(int level, int xp) {
+		super(ElementalNature.FUTON, level, xp);
 	}
 }

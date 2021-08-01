@@ -55,6 +55,20 @@ public class ShinobiPacket {
 		buffer.writeDouble(message.getShinobiData().getChakraRegenerationPerSecond());
 		buffer.writeInt(message.getShinobiData().getChakraRegenerationFactor());
 		buffer.writeInt(message.getShinobiData().getChakraRegenerationTick());
+		
+		/*
+		 * Chakra Nature
+		 */
+		buffer.writeInt(message.getShinobiData().getChakraNature().getKaton().getLevel());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getKaton().getXp());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getSuiton().getLevel());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getSuiton().getXp());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getLevel());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getXp());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getLevel());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getXp());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getLevel());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getXp());
 	}
 
 	public ShinobiPacket decode(PacketBuffer buffer) {
