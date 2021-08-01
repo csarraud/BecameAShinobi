@@ -7,6 +7,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.gui.jutsu.SuitonJutsuSkillGui;
+import fr.sonkuun.becameashinobi.gui.widget.common.AbstractSkillTreeWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;

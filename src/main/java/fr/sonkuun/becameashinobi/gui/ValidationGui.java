@@ -3,7 +3,7 @@ package fr.sonkuun.becameashinobi.gui;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
-import fr.sonkuun.becameashinobi.gui.jutsu.AbstractJutsuGui;
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.widget.choice.NoWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.YesWidget;
 import fr.sonkuun.becameashinobi.util.Color;
@@ -25,12 +25,12 @@ public class ValidationGui extends AbstractJutsuGui {
 	@Override
 	protected void init() {
 		
-		this.widgetClicked.x = 250;
-		this.widgetClicked.y = 100;
+		this.widgetClicked.x = -25;
+		this.widgetClicked.y = -50;
 		
 		this.addButton(this.widgetClicked);
-		this.addButton(new YesWidget(nature, 200, 150, 25, 25, ChatFormatting.GREEN + "Yes"));
-		this.addButton(new NoWidget(nature, 300, 150, 25, 25, ChatFormatting.RED + "No"));
+		this.addButton(new YesWidget(nature, -75, 15, 25, 25, ChatFormatting.GREEN + "Yes"));
+		this.addButton(new NoWidget(nature, 30, 15, 25, 25, ChatFormatting.RED + "No"));
 		
 		super.init();
 	}

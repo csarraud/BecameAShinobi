@@ -1,26 +1,25 @@
-package fr.sonkuun.becameashinobi.gui.widget.choice;
+package fr.sonkuun.becameashinobi.gui.widget.common;
+
+import java.util.List;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
-import fr.sonkuun.becameashinobi.elemental.ElementalNature;
-import fr.sonkuun.becameashinobi.gui.ChooseElementalNatureGui;
+import fr.sonkuun.becameashinobi.geom.Rect;
+import fr.sonkuun.becameashinobi.util.Color;
+import fr.sonkuun.becameashinobi.util.GlUtil;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.gui.ForgeIngameGui;
 
-public class NoWidget extends Widget {
+public abstract class AbstractSkillTreeWidget extends Widget implements IToSkillTreeWidget {
 
-	private ElementalNature nature;
-	
-	public NoWidget(ElementalNature nature, int xIn, int yIn, int widthIn, int heightIn, String msg) {
-		super(xIn, yIn, widthIn, heightIn, msg);
-
-		this.nature = nature;
+    public AbstractSkillTreeWidget(int xIn, int yIn, String msg) {
+		super(xIn - 28, yIn - 28, 28, 28, msg);
 	}
 
 	@Override
@@ -33,14 +32,15 @@ public class NoWidget extends Widget {
             int x = (window.getScaledWidth() / 2) + this.x;
             int y = (window.getScaledHeight() / 2) + this.y;
             
-            mc.getTextureManager().bindTexture(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
+            bind(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
             this.isHovered = mouseX >= x && mouseY >= y && mouseX < x + this.width && mouseY < y + this.height;
             this.blit(x, y, 56, 0, 28, 32);
-
-            mc.getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(Items.RED_DYE), x + 6, y + 10);
+            
+            bind(getTexture());
+            this.blit(x + 6, y + 8, getOffsetX(), getOffsetY(), 16, 16);
             
             if (this.isHovered) {
-                mc.currentScreen.renderTooltip(this.getMessage(), mouseX, mouseY);
+                mc.currentScreen.renderTooltip(getScreenName(), mouseX, mouseY);
             }
             
             RenderSystem.enableRescaleNormal();
@@ -60,10 +60,16 @@ public class NoWidget extends Widget {
     	boolean clicked = mouseX >= x && mouseX <= (x + this.width) && mouseY >= y && mouseY <=(y + this.height);
     			
         if (clicked) {
-            Minecraft.getInstance().displayGuiScreen(new ChooseElementalNatureGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
+            Minecraft.getInstance().displayGuiScreen(getGuiToDisplay());
             return true;
         }
         return false;
     }
-
+	
+	public abstract List<String> getScreenName();
+	public abstract Screen getGuiToDisplay();
+	
+	public void bind(ResourceLocation resource) {
+		Minecraft.getInstance().getTextureManager().bindTexture(resource);
+	}
 }

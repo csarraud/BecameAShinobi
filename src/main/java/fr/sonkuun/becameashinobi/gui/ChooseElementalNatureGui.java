@@ -1,6 +1,6 @@
 package fr.sonkuun.becameashinobi.gui;
 
-import fr.sonkuun.becameashinobi.gui.jutsu.AbstractJutsuGui;
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.widget.choice.DotonChoiceWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.FutonChoiceWidget;
 import fr.sonkuun.becameashinobi.gui.widget.choice.KatonChoiceWidget;
@@ -18,11 +18,11 @@ public class ChooseElementalNatureGui extends AbstractJutsuGui {
 	@Override
 	protected void init() {
 
-		this.addButton(new KatonChoiceWidget(250, 100, "KATON"));
-		this.addButton(new SuitonChoiceWidget(200, 150, "SUITON"));
-		this.addButton(new FutonChoiceWidget(300, 150, "FUTON"));
-		this.addButton(new RaitonChoiceWidget(280, 200, "RAITON"));
-		this.addButton(new DotonChoiceWidget(230, 200, "DOTON"));
+		this.addButton(new KatonChoiceWidget(5, -35, "KATON"));
+		this.addButton(new SuitonChoiceWidget(-40, 0, "SUITON"));
+		this.addButton(new FutonChoiceWidget(50, 0, "FUTON"));
+		this.addButton(new RaitonChoiceWidget(35, 45, "RAITON"));
+		this.addButton(new DotonChoiceWidget(-25, 45, "DOTON"));
 		
 		super.init();
 	}

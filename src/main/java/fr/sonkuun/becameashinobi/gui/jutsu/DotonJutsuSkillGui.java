@@ -1,7 +1,7 @@
 package fr.sonkuun.becameashinobi.gui.jutsu;
 
+import fr.sonkuun.becameashinobi.gui.jutsu.common.AbstractJutsuGui;
 import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.doton.WallSkillObject;
-import fr.sonkuun.becameashinobi.gui.jutsu.skillobject.katon.FireballSkillObject;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 

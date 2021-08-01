@@ -7,6 +7,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.gui.jutsu.FutonJutsuSkillGui;
+import fr.sonkuun.becameashinobi.gui.widget.common.AbstractSkillTreeWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +37,7 @@ public class FutonSkillTreeWidget extends AbstractSkillTreeWidget {
 	public List<String> getScreenName() {
 		List<String> list = new ArrayList<String>();
 		
-		list.add(ChatFormatting.GREEN + "Futon");
+		list.add(ChatFormatting.GREEN + "Futon skill tree");
 		
 		return list;
 	}
