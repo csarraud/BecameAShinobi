@@ -306,7 +306,6 @@ public final class GlUtil {
     public static void beginScissor(Rect scissorRect) {
         MainWindow mainWindow = MC.getMainWindow();
 
-        // TODO is it possible to have a non integer scale factor?
         Rect scaledRect = scissorRect.scale((int)mainWindow.getGuiScaleFactor());
         scaledRect = scaledRect.withY(mainWindow.getHeight() - scaledRect.getBottom());
 
