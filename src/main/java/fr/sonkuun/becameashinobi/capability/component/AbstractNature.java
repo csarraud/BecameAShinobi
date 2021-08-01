@@ -2,7 +2,7 @@ package fr.sonkuun.becameashinobi.capability.component;
 
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 
-public abstract class AbstractNature implements INature{
+public abstract class AbstractNature implements INature {
 	
 	private ElementalNature nature;
 	private int level;
@@ -12,6 +12,12 @@ public abstract class AbstractNature implements INature{
 		this.nature = nature;
 		this.level = level;
 		this.xp = xp;
+	}
+	
+	public AbstractNature(AbstractNature natureToCopy) {
+		this.nature = natureToCopy.getNature();
+		this.level = natureToCopy.getLevel();
+		this.xp = natureToCopy.getXp();
 	}
 
 	@Override

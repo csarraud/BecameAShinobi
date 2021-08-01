@@ -9,8 +9,11 @@ public class KatonNature extends AbstractNature {
 		super(ElementalNature.KATON, 0, 0);
 	}
 	
+	public KatonNature(KatonNature katonNature) {
+		super(ElementalNature.KATON, katonNature.getLevel(), katonNature.getXp());
+	}
+	
 	public KatonNature(ElementalNature nature, int level, int xp) {
 		super(nature, level, xp);
 	}
-
 }

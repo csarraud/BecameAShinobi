@@ -56,6 +56,8 @@ public class ShinobiData {
 		this.chakraRegenerationPerSecond = 1.0;
 		this.chakraRegenerationFactor = 100;
 		this.chakraRegenerationTick = 0;
+		
+		this.chakraNature = new ChakraNature();
 	}
 	
 	public ShinobiData(ShinobiData data) {
@@ -70,6 +72,8 @@ public class ShinobiData {
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
 		this.chakraRegenerationFactor = data.getChakraRegenerationFactor();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
+		
+		this.chakraNature = new ChakraNature(data.getChakraNature());
 	}
 	
 	/*
@@ -167,6 +171,8 @@ public class ShinobiData {
 		this.chakraRegenerationPerSecond = data.getChakraRegenerationPerSecond();
 		this.chakraRegenerationFactor = data.getChakraRegenerationFactor();
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
+		
+		this.chakraNature = new ChakraNature(data.getChakraNature());
 	}
 	
 	public static ShinobiData fromPacketBuffer(PacketBuffer buffer) {
@@ -179,7 +185,8 @@ public class ShinobiData {
 				.setBaseChakraRegenerationPerSecond(buffer.readDouble())
 				.setChakraRegenerationPerSecond(buffer.readDouble())
 				.setChakraRegenerationFactor(buffer.readInt())
-				.setChakraRegenerationTick(buffer.readInt());
+				.setChakraRegenerationTick(buffer.readInt())
+				.setChakraNature(new ChakraNature()); // TODO : implement interface from buffer to chakra nature
 	}
 	
 	public void sendDataToClient(PlayerEntity player) {
@@ -221,9 +228,11 @@ public class ShinobiData {
 			tag.putDouble(CHAKRA_VALUE_NBT, instance.chakraValue);
 			tag.putDouble(BASE_CHAKRA_REGENERATION_PER_SECOND_NBT, instance.baseChakraRegenerationPerSecond);
 			tag.putDouble(CHAKRA_REGENERATION_PER_SECOND_NBT, instance.chakraRegenerationPerSecond);
-			tag.putInt(CHAKRA_REGENERATION_FACTOR_NBT, instance.getChakraRegenerationFactor());
+			tag.putInt(CHAKRA_REGENERATION_FACTOR_NBT, instance.chakraRegenerationFactor);
 			tag.putInt(CHAKRA_REGENERATION_TICK_NBT, instance.chakraRegenerationTick);
 
+			// TODO : implement interface from buffer to chakra nature
+			
 			return tag;
 		}
 
@@ -245,6 +254,8 @@ public class ShinobiData {
 				instance.setChakraRegenerationPerSecond(tag.getDouble(CHAKRA_REGENERATION_PER_SECOND_NBT));
 				instance.setChakraRegenerationFactor(tag.getInt(CHAKRA_REGENERATION_FACTOR_NBT));
 				instance.setChakraRegenerationTick(tag.getInt(CHAKRA_REGENERATION_TICK_NBT));
+				
+				instance.setChakraNature(new ChakraNature()); // TODO : implement interface from buffer to chakra nature
 			}
 		}
 	}
@@ -368,6 +379,19 @@ public class ShinobiData {
 
 	public int getChakraRegenerationTick() {
 		return chakraRegenerationTick;
+	}
+	
+	/*
+	 * ########## Chakra Nature ##########
+	 */
+	public ShinobiData setChakraNature(ChakraNature chakraNature) {
+		this.chakraNature = new ChakraNature(chakraNature);
+		
+		return this;
+	}
+	
+	public ChakraNature getChakraNature() {
+		return chakraNature;
 	}
 	
 }
