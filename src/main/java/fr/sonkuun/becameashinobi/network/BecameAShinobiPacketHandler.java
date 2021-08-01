@@ -19,11 +19,9 @@ public class BecameAShinobiPacketHandler {
 	
 	public static void register() {
 		ShinobiPacket shinobiPacket = new ShinobiPacket();
-		PlayerChooseElementalNatureGuiPacket playerChooseElementalNatureGuiPacket = new PlayerChooseElementalNatureGuiPacket();
 		ElementalNaturePacket elementalNaturePacket = new ElementalNaturePacket();
 		
 		INSTANCE.registerMessage(ID++, ShinobiPacket.class, shinobiPacket::encode, shinobiPacket::decode, shinobiPacket::handle);
-		INSTANCE.registerMessage(ID++, PlayerChooseElementalNatureGuiPacket.class, playerChooseElementalNatureGuiPacket::encode, playerChooseElementalNatureGuiPacket::decode, playerChooseElementalNatureGuiPacket::handle);
 		INSTANCE.registerMessage(ID++, ElementalNaturePacket.class, elementalNaturePacket::encode, elementalNaturePacket::decode, elementalNaturePacket::handle);
 	}
 }

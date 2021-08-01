@@ -1,5 +1,6 @@
 package fr.sonkuun.becameashinobi.capability;
 
+import fr.sonkuun.becameashinobi.capability.component.ChakraNature;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import fr.sonkuun.becameashinobi.network.ShinobiPacket;
 import fr.sonkuun.becameashinobi.util.MathUtil;
@@ -37,6 +38,11 @@ public class ShinobiData {
 	private double chakraRegenerationPerSecond;
 	private int chakraRegenerationFactor;
 	private int chakraRegenerationTick;
+	
+	/*
+	 * Chakra nature
+	 */
+	private ChakraNature chakraNature;
 	
 	public ShinobiData() {
 		this.maxHealth = 20;

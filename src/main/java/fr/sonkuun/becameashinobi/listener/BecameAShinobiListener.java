@@ -3,9 +3,8 @@ package fr.sonkuun.becameashinobi.listener;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
-import fr.sonkuun.becameashinobi.gui.widget.common.JutsuTreeGuiWidget;
+import fr.sonkuun.becameashinobi.gui.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
-import fr.sonkuun.becameashinobi.network.PlayerChooseElementalNatureGuiPacket;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,8 +34,7 @@ public class BecameAShinobiListener {
 			ElementalNatureData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).orElse(null);
 			
 			if(data.countLearnedElementalNature() == 0) {
-				BecameAShinobiPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
-						new PlayerChooseElementalNatureGuiPacket(player.getUniqueID(), true));
+				
 			}
 		}
 	}

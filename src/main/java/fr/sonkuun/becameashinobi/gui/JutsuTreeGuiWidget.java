@@ -1,10 +1,9 @@
-package fr.sonkuun.becameashinobi.gui.widget.common;
+package fr.sonkuun.becameashinobi.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
-import fr.sonkuun.becameashinobi.gui.jutsu.ChakraSkillGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.renderer.RenderHelper;
@@ -41,7 +40,7 @@ public class JutsuTreeGuiWidget extends Widget {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int modifiers) {
         if (super.mouseClicked(mouseX, mouseY, modifiers)) {
-            Minecraft.getInstance().displayGuiScreen(new ChakraSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
+            //Minecraft.getInstance().displayGuiScreen(new ChakraSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
             return true;
         }
         return false;
