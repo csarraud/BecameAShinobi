@@ -7,14 +7,14 @@ import net.minecraft.client.multiplayer.ClientAdvancementManager;
 
 public class ChakraSkillGui extends AbstractCustomGui {
 
-	protected ChakraSkillGui(ClientAdvancementManager clientAdvancementManager) {
+	public ChakraSkillGui(ClientAdvancementManager clientAdvancementManager) {
 		super(clientAdvancementManager);
 	}
 
 	@Override
 	protected void init() {
 
-		this.skillWidgets.add(new EyeJutsuWidget(200, 20, 20, 20));
+		this.skillWidgets.add(new EyeJutsuWidget(190, 20, 20, 20));
 		
 		super.init();
 	}

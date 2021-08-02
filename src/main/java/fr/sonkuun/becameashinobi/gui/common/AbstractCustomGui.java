@@ -82,7 +82,7 @@ public abstract class AbstractCustomGui extends Screen {
 	}
 
     private void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
-
+    	
 		for(AbstractSkillWidget skillItem : this.skillWidgets) {
 			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
 		}

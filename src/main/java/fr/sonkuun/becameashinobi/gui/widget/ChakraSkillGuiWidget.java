@@ -1,11 +1,11 @@
-package fr.sonkuun.becameashinobi.gui;
+package fr.sonkuun.becameashinobi.gui.widget;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import fr.sonkuun.becameashinobi.gui.widget.AbstractSkillWidget;
+import fr.sonkuun.becameashinobi.gui.ChakraSkillGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
