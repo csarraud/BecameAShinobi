@@ -7,6 +7,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -33,6 +34,16 @@ public class EyeJutsuWidget extends AbstractSkillWidget {
 		lore.add("");
 		
 		return lore;
+	}
+
+	@Override
+	protected Screen createGui() {
+		return null;
+	}
+
+	@Override
+	protected boolean canOpenGui() {
+		return false;
 	}
 
 }

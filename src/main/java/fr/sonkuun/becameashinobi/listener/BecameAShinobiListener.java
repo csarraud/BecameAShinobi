@@ -55,7 +55,7 @@ public class BecameAShinobiListener {
 	@SubscribeEvent
 	public void playerInventoryOpened(GuiScreenEvent.InitGuiEvent.Post event) {
 		if(event.getGui() instanceof InventoryScreen) {
-			event.addWidget(new ChakraSkillGuiWidget(310, 43, "Jutsu Tree"));
+			event.addWidget(new ChakraSkillGuiWidget(310, 43, 28, 28));
 		}
 	}
 	
