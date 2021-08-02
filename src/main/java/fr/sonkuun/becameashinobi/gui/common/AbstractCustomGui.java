@@ -109,7 +109,7 @@ public abstract class AbstractCustomGui extends Screen {
 
 	@Override
 	public boolean mouseClicked(double x, double y, int modifiers) {
-		// TODO Auto-generated method stub
+		
 		return super.mouseClicked(x, y, modifiers);
 	}
 
