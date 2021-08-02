@@ -163,6 +163,15 @@ public abstract class AbstractCustomGui extends Screen {
 	}
 
 	@Override
+	public boolean keyPressed(int key1, int key2, int key3) {
+		if(key1 == 69) {
+			this.onClose();
+		}
+		
+		return true;
+	}
+
+	@Override
 	public boolean isPauseScreen() {
 		return false;
 	}

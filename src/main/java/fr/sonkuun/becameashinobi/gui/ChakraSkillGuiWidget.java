@@ -24,7 +24,7 @@ public class ChakraSkillGuiWidget extends Widget {
             Minecraft mc  = Minecraft.getInstance();
             mc.getTextureManager().bindTexture(new ResourceLocation(BecameAShinobi.MODID, "textures/gui/tabs.png"));
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-            this.blit(this.x, this.y, 56, 0, 28, 32);
+            this.blit(this.x, this.y, 28, 0, 28, 32);
 
             if (this.isHovered) {
                 mc.currentScreen.renderTooltip("Chakra Skill", mouseX, mouseY);
