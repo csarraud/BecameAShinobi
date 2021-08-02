@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
-public class JutsuTreeGuiWidget extends Widget {
+public class ChakraSkillGuiWidget extends Widget {
 
-	public JutsuTreeGuiWidget(int x, int y, String buttonText) {
+	public ChakraSkillGuiWidget(int x, int y, String buttonText) {
         super(x - 28, y - 28, 28, 28, buttonText);
     }
 
@@ -40,7 +40,7 @@ public class JutsuTreeGuiWidget extends Widget {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int modifiers) {
         if (super.mouseClicked(mouseX, mouseY, modifiers)) {
-            //Minecraft.getInstance().displayGuiScreen(new ChakraSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
+            Minecraft.getInstance().displayGuiScreen(new ChakraSkillGui(Minecraft.getInstance().player.connection.getAdvancementManager()));
             return true;
         }
         return false;

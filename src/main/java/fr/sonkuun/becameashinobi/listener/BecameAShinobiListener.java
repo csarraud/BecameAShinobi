@@ -2,7 +2,7 @@ package fr.sonkuun.becameashinobi.listener;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
-import fr.sonkuun.becameashinobi.gui.JutsuTreeGuiWidget;
+import fr.sonkuun.becameashinobi.gui.ChakraSkillGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
@@ -54,7 +54,7 @@ public class BecameAShinobiListener {
 	@SubscribeEvent
 	public void playerInventoryOpened(GuiScreenEvent.InitGuiEvent.Post event) {
 		if(event.getGui() instanceof InventoryScreen) {
-			event.addWidget(new JutsuTreeGuiWidget(50, 50, "Jutsu Tree"));
+			event.addWidget(new ChakraSkillGuiWidget(50, 50, "Jutsu Tree"));
 		}
 	}
 	
