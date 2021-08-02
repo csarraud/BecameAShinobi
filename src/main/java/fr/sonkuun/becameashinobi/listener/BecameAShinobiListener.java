@@ -1,7 +1,6 @@
 package fr.sonkuun.becameashinobi.listener;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
-import fr.sonkuun.becameashinobi.capability.ElementalNatureData;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.gui.JutsuTreeGuiWidget;
 import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
@@ -30,13 +29,9 @@ public class BecameAShinobiListener {
 	public void onPlayerJoin(PlayerLoggedInEvent event) {
 		PlayerEntity player = event.getPlayer();
 		
-		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).isPresent()) {
-			ElementalNatureData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_ELEMENTAL_NATURE).orElse(null);
-			
-			if(data.countLearnedElementalNature() == 0) {
-				
-			}
-		}
+		/*
+		 * TODO : implement elemental nature choice
+		 */
 	}
 	
 	/*
@@ -192,6 +187,8 @@ public class BecameAShinobiListener {
 	 * Return a custom value for every natural damage
 	 * 
 	 * If the damage isn't override, return NaN
+	 * 
+	 * TODO : override all damage
 	 */
 	public double getDamageFromSource(DamageSource source, LivingEntity entity) {		
 		ShinobiData data = entity.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
