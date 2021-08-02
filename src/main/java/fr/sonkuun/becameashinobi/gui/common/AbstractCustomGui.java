@@ -7,6 +7,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
 import fr.sonkuun.becameashinobi.geom.Rect;
+import fr.sonkuun.becameashinobi.gui.widget.AbstractSkillWidget;
 import fr.sonkuun.becameashinobi.util.Color;
 import fr.sonkuun.becameashinobi.util.GlUtil;
 import fr.sonkuun.becameashinobi.util.RenderUtil;
@@ -26,6 +27,8 @@ public abstract class AbstractCustomGui extends Screen {
 	protected int internalWidth;
     protected float zoom = MIN_ZOOM;
     protected int deltaX = 0, deltaY = 0;
+    
+    protected List<AbstractSkillWidget> skillWidgets = new ArrayList<AbstractSkillWidget>();
 
 	protected AbstractCustomGui(ClientAdvancementManager clientAdvancementManager) {
 		super(NarratorChatListener.EMPTY);
@@ -80,6 +83,15 @@ public abstract class AbstractCustomGui extends Screen {
 
     private void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
 
+		for(AbstractSkillWidget skillItem : this.skillWidgets) {
+			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
+		}
+		
+		for(AbstractSkillWidget skillItem : this.skillWidgets) {
+			if(skillItem.isMouseOver()) {
+				this.renderTooltip(skillItem.getDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
+			}
+		}
     }
     
 	public void renderWindow(int left, int top, int right, int bottom) {
@@ -116,6 +128,9 @@ public abstract class AbstractCustomGui extends Screen {
 	@Override
 	public boolean mouseDragged(double x, double y, int button,
 			double deltaX, double deltaY) {
+		if(!canMove()) {
+			return true;
+		}
 		
 		int newDeltaX = this.deltaX + (int)deltaX;
 		if(newDeltaX >= MIN_DELTA_X && newDeltaX <= MAX_DELTA_X) {
@@ -127,8 +142,6 @@ public abstract class AbstractCustomGui extends Screen {
 			this.deltaY = newDeltaY;
 		}
 		
-		//System.out.println(String.format("[x = %s, y = %s, button = %s, deltaX = %s, deltaY = %s]",
-				//x, y, button, deltaX, deltaY));
 		return super.mouseDragged(x, y, button, deltaX, deltaY);
 	}
 
@@ -149,15 +162,14 @@ public abstract class AbstractCustomGui extends Screen {
 
 	@Override
 	public void mouseMoved(double x, double y) {
-		if(!canMove()) {
-			return;
-		}
-		
 		int left = SIDE + (width - internalWidth) / 2;
         int top = TOP + (height - internalHeight) / 2;
 		int boxLeft = left + PADDING;
         int boxTop = top + 2*PADDING;
 		
+        for(AbstractSkillWidget skillItem : skillWidgets) {
+			skillItem.isMouseOver(x, y, this.deltaX + boxLeft, this.deltaY + boxTop);
+		}
 		
 		super.mouseMoved(x, y);
 	}
