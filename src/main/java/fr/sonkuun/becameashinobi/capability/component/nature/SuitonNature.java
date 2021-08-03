@@ -8,15 +8,15 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class SuitonNature extends AbstractNature {
 
 	public SuitonNature() {
-		this(0, 0);
+		this(0);
 	}
 	
 	public SuitonNature(SuitonNature suitonNature) {
-		this(suitonNature.getLevel(), suitonNature.getXp());
+		this(suitonNature.getValue());
 	}
 	
-	public SuitonNature(int level, int xp) {
-		super(ElementalNature.SUITON, level, xp);
+	public SuitonNature(int value) {
+		super(ElementalNature.SUITON, value);
 	}
 
 	@Override

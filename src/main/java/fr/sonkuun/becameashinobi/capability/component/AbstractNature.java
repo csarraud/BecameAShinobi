@@ -1,25 +1,20 @@
 package fr.sonkuun.becameashinobi.capability.component;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 
 public abstract class AbstractNature implements INature {
 	
 	private ElementalNature nature;
-	private int level;
-	private int xp;
+	private int value;
 	
-	public AbstractNature(ElementalNature nature, int level, int xp) {
+	public AbstractNature(ElementalNature nature, int value) {
 		this.nature = nature;
-		this.level = level;
-		this.xp = xp;
+		this.value = value;
 	}
 	
 	public AbstractNature(AbstractNature natureToCopy) {
 		this.nature = natureToCopy.getNature();
-		this.level = natureToCopy.getLevel();
-		this.xp = natureToCopy.getXp();
+		this.value = natureToCopy.getValue();
 	}
 
 	@Override
@@ -28,33 +23,17 @@ public abstract class AbstractNature implements INature {
 	}
 
 	@Override
-	public int getLevel() {
-		return level;
+	public int getValue() {
+		return value;
 	}
 
 	@Override
-	public void setLevel(int level) {
-		this.level = level;
+	public void setValue(int level) {
+		this.value = level;
 	}
 
 	@Override
-	public void addLevel(int increment) {
-		this.level += increment;
-	}
-
-	@Override
-	public int getXp() {
-		return xp;
-	}
-
-	@Override
-	public void setXp(int xp) {
-		this.xp = xp;
-	}
-
-	@Override
-	public void addXp(int increment) {
-		this.xp += increment;
-	}
-	
+	public void addValue(int increment) {
+		this.value += increment;
+	}	
 }

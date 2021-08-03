@@ -59,16 +59,11 @@ public class ShinobiPacket {
 		/*
 		 * Chakra Nature
 		 */
-		buffer.writeInt(message.getShinobiData().getChakraNature().getKaton().getLevel());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getKaton().getXp());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getSuiton().getLevel());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getSuiton().getXp());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getLevel());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getXp());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getLevel());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getXp());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getLevel());
-		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getXp());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getKaton().getValue());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getSuiton().getValue());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getValue());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getValue());
+		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getValue());
 	}
 
 	public ShinobiPacket decode(PacketBuffer buffer) {

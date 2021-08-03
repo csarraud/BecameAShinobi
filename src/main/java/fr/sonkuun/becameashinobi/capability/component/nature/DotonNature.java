@@ -8,15 +8,15 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class DotonNature extends AbstractNature {
 
 	public DotonNature() {
-		this(0, 0);
+		this(0);
 	}
 	
 	public DotonNature(DotonNature dotonNature) {
-		this(dotonNature.getLevel(), dotonNature.getXp());
+		this(dotonNature.getValue());
 	}
 	
-	public DotonNature(int level, int xp) {
-		super(ElementalNature.DOTON, level, xp);
+	public DotonNature(int value) {
+		super(ElementalNature.DOTON, value);
 	}
 
 	@Override

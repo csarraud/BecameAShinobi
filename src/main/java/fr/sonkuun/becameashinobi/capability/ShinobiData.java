@@ -208,11 +208,11 @@ public class ShinobiData {
 				 */
 				.setChakraNature(
 						new ChakraNature(
-								new KatonNature(buffer.readInt(), buffer.readInt()),
-								new SuitonNature(buffer.readInt(), buffer.readInt()),
-								new DotonNature(buffer.readInt(), buffer.readInt()),
-								new RaitonNature(buffer.readInt(), buffer.readInt()),
-								new FutonNature(buffer.readInt(), buffer.readInt())
+								new KatonNature(buffer.readInt()),
+								new SuitonNature(buffer.readInt()),
+								new DotonNature(buffer.readInt()),
+								new RaitonNature(buffer.readInt()),
+								new FutonNature(buffer.readInt())
 								)
 						);
 	}
@@ -241,16 +241,11 @@ public class ShinobiData {
 	public static final String CHAKRA_REGENERATION_FACTOR_NBT = "chakra_regeneration_factor";
 	public static final String CHAKRA_REGENERATION_TICK_NBT = "chakra_regeneration_tick";
 
-	public static final String KATON_NATURE_LEVEL_NBT = "katon_nature_level";
-	public static final String KATON_NATURE_XP_NBT = "katon_nature_xp";
-	public static final String SUITON_NATURE_LEVEL_NBT = "suiton_nature_level";
-	public static final String SUITON_NATURE_XP_NBT = "suiton_nature_xp";
-	public static final String DOTON_NATURE_LEVEL_NBT = "doton_nature_level";
-	public static final String DOTON_NATURE_XP_NBT = "doton_nature_xp";
-	public static final String RAITON_NATURE_LEVEL_NBT = "raiton_nature_level";
-	public static final String RAITON_NATURE_XP_NBT = "raiton_nature_xp";
-	public static final String FUTON_NATURE_LEVEL_NBT = "futon_nature_level";
-	public static final String FUTON_NATURE_XP_NBT = "futon_nature_xp";
+	public static final String KATON_NATURE_VALUE_NBT = "katon_nature_value";
+	public static final String SUITON_NATURE_VALUE_NBT = "suiton_nature_value";
+	public static final String DOTON_NATURE_VALUE_NBT = "doton_nature_value";
+	public static final String RAITON_NATURE_VALUE_NBT = "raiton_nature_value";
+	public static final String FUTON_NATURE_VALUE_NBT = "futon_nature_value";
 
 	public static class ShinobiDataNBTStorage implements Capability.IStorage<ShinobiData> {
 
@@ -270,16 +265,11 @@ public class ShinobiData {
 			tag.putInt(CHAKRA_REGENERATION_FACTOR_NBT, instance.chakraRegenerationFactor);
 			tag.putInt(CHAKRA_REGENERATION_TICK_NBT, instance.chakraRegenerationTick);
 
-			tag.putInt(KATON_NATURE_LEVEL_NBT, instance.chakraNature.getKaton().getLevel());
-			tag.putInt(KATON_NATURE_XP_NBT, instance.chakraNature.getKaton().getXp());
-			tag.putInt(SUITON_NATURE_LEVEL_NBT, instance.chakraNature.getSuiton().getLevel());
-			tag.putInt(SUITON_NATURE_XP_NBT, instance.chakraNature.getSuiton().getXp());
-			tag.putInt(DOTON_NATURE_LEVEL_NBT, instance.chakraNature.getDoton().getLevel());
-			tag.putInt(DOTON_NATURE_XP_NBT, instance.chakraNature.getDoton().getXp());
-			tag.putInt(RAITON_NATURE_LEVEL_NBT, instance.chakraNature.getRaiton().getLevel());
-			tag.putInt(RAITON_NATURE_XP_NBT, instance.chakraNature.getRaiton().getXp());
-			tag.putInt(FUTON_NATURE_LEVEL_NBT, instance.chakraNature.getFuton().getLevel());
-			tag.putInt(FUTON_NATURE_XP_NBT, instance.chakraNature.getFuton().getXp());
+			tag.putInt(KATON_NATURE_VALUE_NBT, instance.chakraNature.getKaton().getValue());
+			tag.putInt(SUITON_NATURE_VALUE_NBT, instance.chakraNature.getSuiton().getValue());
+			tag.putInt(DOTON_NATURE_VALUE_NBT, instance.chakraNature.getDoton().getValue());
+			tag.putInt(RAITON_NATURE_VALUE_NBT, instance.chakraNature.getRaiton().getValue());
+			tag.putInt(FUTON_NATURE_VALUE_NBT, instance.chakraNature.getFuton().getValue());
 
 			return tag;
 		}
@@ -305,11 +295,11 @@ public class ShinobiData {
 
 				instance.setChakraNature(
 						new ChakraNature(
-								new KatonNature(tag.getInt(KATON_NATURE_LEVEL_NBT), tag.getInt(KATON_NATURE_LEVEL_NBT)),
-								new SuitonNature(tag.getInt(SUITON_NATURE_LEVEL_NBT), tag.getInt(SUITON_NATURE_LEVEL_NBT)),
-								new DotonNature(tag.getInt(DOTON_NATURE_LEVEL_NBT), tag.getInt(DOTON_NATURE_LEVEL_NBT)),
-								new RaitonNature(tag.getInt(RAITON_NATURE_LEVEL_NBT), tag.getInt(RAITON_NATURE_LEVEL_NBT)),
-								new FutonNature(tag.getInt(FUTON_NATURE_LEVEL_NBT), tag.getInt(FUTON_NATURE_LEVEL_NBT))
+								new KatonNature(tag.getInt(KATON_NATURE_VALUE_NBT)),
+								new SuitonNature(tag.getInt(SUITON_NATURE_VALUE_NBT)),
+								new DotonNature(tag.getInt(DOTON_NATURE_VALUE_NBT)),
+								new RaitonNature(tag.getInt(RAITON_NATURE_VALUE_NBT)),
+								new FutonNature(tag.getInt(FUTON_NATURE_VALUE_NBT))
 								)
 						);
 			}
@@ -460,35 +450,35 @@ public class ShinobiData {
 		/*
 		 * Katon
 		 */
-		if(chakraNature.getKaton().getLevel() != 0) {
+		if(chakraNature.getKaton().getValue() != 0) {
 			natureList.add(chakraNature.getKaton());
 		}
 		
 		/*
 		 * Suiton
 		 */
-		if(chakraNature.getSuiton().getLevel() != 0) {
+		if(chakraNature.getSuiton().getValue() != 0) {
 			natureList.add(chakraNature.getSuiton());
 		}
 		
 		/*
 		 * Doton
 		 */
-		if(chakraNature.getDoton().getLevel() != 0) {
+		if(chakraNature.getDoton().getValue() != 0) {
 			natureList.add(chakraNature.getDoton());
 		}
 		
 		/*
 		 * Raiton
 		 */
-		if(chakraNature.getRaiton().getLevel() != 0) {
+		if(chakraNature.getRaiton().getValue() != 0) {
 			natureList.add(chakraNature.getRaiton());
 		}
 		
 		/*
 		 * Futon
 		 */
-		if(chakraNature.getFuton().getLevel() != 0) {
+		if(chakraNature.getFuton().getValue() != 0) {
 			natureList.add(chakraNature.getFuton());
 		}
 		

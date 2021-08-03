@@ -8,15 +8,15 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class KatonNature extends AbstractNature {
 
 	public KatonNature() {
-		this(0, 0);
+		this(0);
 	}
 	
 	public KatonNature(KatonNature katonNature) {
-		this(katonNature.getLevel(), katonNature.getXp());
+		this(katonNature.getValue());
 	}
 	
-	public KatonNature(int level, int xp) {
-		super(ElementalNature.KATON, level, xp);
+	public KatonNature(int value) {
+		super(ElementalNature.KATON, value);
 	}
 
 	@Override

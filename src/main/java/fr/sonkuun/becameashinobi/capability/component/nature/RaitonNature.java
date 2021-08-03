@@ -8,15 +8,15 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class RaitonNature extends AbstractNature {
 
 	public RaitonNature() {
-		this(0, 0);
+		this(0);
 	}
 	
 	public RaitonNature(RaitonNature raitonNature) {
-		this(raitonNature.getLevel(), raitonNature.getXp());
+		this(raitonNature.getValue());
 	}
 	
-	public RaitonNature(int level, int xp) {
-		super(ElementalNature.RAITON, level, xp);
+	public RaitonNature(int value) {
+		super(ElementalNature.RAITON, value);
 	}
 
 	@Override

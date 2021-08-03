@@ -8,15 +8,15 @@ import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 public class FutonNature extends AbstractNature {
 
 	public FutonNature() {
-		this(0, 0);
+		this(0);
 	}
 	
 	public FutonNature(FutonNature futonNature) {
-		this(futonNature.getLevel(), futonNature.getXp());
+		this(futonNature.getValue());
 	}
 	
-	public FutonNature(int level, int xp) {
-		super(ElementalNature.FUTON, level, xp);
+	public FutonNature(int value) {
+		super(ElementalNature.FUTON, value);
 	}
 
 	@Override
