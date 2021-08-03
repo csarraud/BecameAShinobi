@@ -351,6 +351,10 @@ public class ShinobiData {
 	public double getExactHealth() {
 		return health;
 	}
+	
+	public double getRoundedHealth() {
+		return ((int) (health * 100)) / 100.0;
+	}
 
 	public int getHealth() {
 		return (int) health;
@@ -367,7 +371,7 @@ public class ShinobiData {
 		 * TODO : implement additional health regeneration
 		 */
 
-		return MathUtil.round(value, 1);
+		return ((int) (value * 100)) / 100.0;
 	}
 
 	public int getHealthRegenerationTick() {

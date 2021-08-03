@@ -6,7 +6,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fr.sonkuun.becameashinobi.BecameAShinobi;
-import fr.sonkuun.becameashinobi.gui.ChakraSkillGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
@@ -19,8 +18,6 @@ public abstract class AbstractSkillWidget extends Widget {
 
 	protected int x, y, width, height;
 	protected boolean isMouseOver;
-	protected ItemStack itemstack;
-	protected List<String> description;
 	
 	public AbstractSkillWidget(int x, int y, int width, int height) {
 		super(x, y, width, height, "");
@@ -31,8 +28,6 @@ public abstract class AbstractSkillWidget extends Widget {
 		this.height = height;
 		
 		this.isMouseOver = false;
-		this.itemstack = createItemStack();
-		this.description = createDescription();
 	}
 
     @Override
@@ -88,17 +83,9 @@ public abstract class AbstractSkillWidget extends Widget {
 	public int getHeight() {
 		return height;
 	}
-
-	public ItemStack getItemstack() {
-		return itemstack;
-	}
 	
-	public List<String> getDescription() {
-		return description;
-	}
-	
-	protected abstract ItemStack createItemStack();
-	protected abstract List<String> createDescription();
+	public abstract ItemStack createItemStack();
+	public abstract List<String> createDescription();
 	protected abstract Screen createGui();
 	protected abstract boolean canOpenGui();
 

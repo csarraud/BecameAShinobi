@@ -18,12 +18,12 @@ public class EyeJutsuWidget extends AbstractSkillWidget {
 	}
 
 	@Override
-	protected ItemStack createItemStack() {
+	public ItemStack createItemStack() {
 		return new ItemStack(Items.ENDER_EYE);
 	}
 
 	@Override
-	protected List<String> createDescription() {
+	public List<String> createDescription() {
 		List<String> lore = new ArrayList<String>();
 		
 		ClientPlayerEntity player = Minecraft.getInstance().player;

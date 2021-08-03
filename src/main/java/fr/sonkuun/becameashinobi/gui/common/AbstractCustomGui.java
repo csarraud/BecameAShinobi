@@ -84,12 +84,12 @@ public abstract class AbstractCustomGui extends Screen {
     private void drawInside(int boxLeft, int boxTop, int boxRight, int boxBottom, int insideWidth, int insideHeight) {
     	
 		for(AbstractSkillWidget skillItem : this.skillWidgets) {
-			this.itemRenderer.renderItemIntoGUI(skillItem.getItemstack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
+			this.itemRenderer.renderItemIntoGUI(skillItem.createItemStack(), skillItem.getX() + this.deltaX, skillItem.getY() + this.deltaY);
 		}
 		
 		for(AbstractSkillWidget skillItem : this.skillWidgets) {
 			if(skillItem.isMouseOver()) {
-				this.renderTooltip(skillItem.getDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
+				this.renderTooltip(skillItem.createDescription(), skillItem.getX() + 5 + this.deltaX, skillItem.getY() + this.deltaY);
 			}
 		}
     }

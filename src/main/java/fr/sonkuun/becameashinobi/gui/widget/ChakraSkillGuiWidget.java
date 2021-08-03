@@ -18,12 +18,12 @@ public class ChakraSkillGuiWidget extends AbstractSkillWidget {
     }
 
 	@Override
-	protected ItemStack createItemStack() {
+	public ItemStack createItemStack() {
 		return new ItemStack(Items.BOOK);
 	}
 
 	@Override
-	protected List<String> createDescription() {
+	public List<String> createDescription() {
 		List<String> lore = new ArrayList<String>();
 		
 		lore.add(ChatFormatting.WHITE + "Chakra Skill");
