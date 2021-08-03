@@ -44,7 +44,7 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			double healthRegeneration = data.getTotalRegenerationHealth();
 
 			lore.add(ChatFormatting.RED + "Health : " + health + " / " + maxHealth);
-			lore.add(ChatFormatting.RED + "Health regeneration : +" + healthRegeneration + "/s");
+			lore.add(ChatFormatting.RED + "Regeneration : +" + healthRegeneration + "/s");
 			lore.add("");
 			
 			/*
@@ -56,7 +56,7 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			int sneakFactor = data.getChakraRegenerationFactor();
 
 			lore.add(ChatFormatting.BLUE + "Chakra : " + chakra + " / " + maxChakra);
-			lore.add(ChatFormatting.BLUE + "Chakra regeneration : +" + chakraRegeneration + "/s");
+			lore.add(ChatFormatting.BLUE + "Regeneration : +" + chakraRegeneration + "/s");
 			lore.add(ChatFormatting.BLUE + "Sneak factor : " + sneakFactor + "%");
 			lore.add("");
 			
@@ -65,8 +65,7 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			 */
 			for(AbstractNature nature : data.getLearnedChakraNature()) {
 
-				lore.add(nature.getChatFormattingColor() + nature.getNature().toString() + " level : " + nature.getLevel());
-				lore.add(nature.getChatFormattingColor() + nature.getNature().toString() + " xp : " + nature.getXp());
+				lore.add(nature.getChatFormattingColor() + nature.getNature().getName() + " level : " + nature.getLevel() + " (" + nature.getXp() + " xp)");
 				lore.add("");
 			}
 			
