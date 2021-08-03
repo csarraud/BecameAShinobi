@@ -1,15 +1,18 @@
 package fr.sonkuun.becameashinobi.listener;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.gui.widget.ChakraSkillGuiWidget;
-import fr.sonkuun.becameashinobi.network.BecameAShinobiPacketHandler;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
-import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
@@ -18,7 +21,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BecameAShinobiListener {
 	
@@ -30,9 +32,16 @@ public class BecameAShinobiListener {
 	public void onPlayerJoin(PlayerLoggedInEvent event) {
 		PlayerEntity player = event.getPlayer();
 		
-		/*
-		 * TODO : implement elemental nature choice
-		 */
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+			
+			/*
+			 * No elemental nature already learned
+			 */
+			if(data.getLearnedChakraNature().size() == 0) {
+				player.sendMessage(new StringTextComponent("You can choose one chakra nature to learn."));
+			}
+		}
 	}
 	
 	/*
@@ -50,6 +59,7 @@ public class BecameAShinobiListener {
 			data.sendDataToServer(player);
 		}
 	}
+	
 	/*
 	 * Add a button to open Jutsu Tree Gui
 	 */
