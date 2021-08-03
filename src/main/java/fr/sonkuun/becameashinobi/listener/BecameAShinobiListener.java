@@ -45,6 +45,7 @@ public class BecameAShinobiListener {
 			ShinobiData data = event.getPlayer().getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 			data.useChakra(10);
 			data.removeHealth(1);
+			data.getChakraNature().getKaton().addLevel(1);
 			PlayerEntity player = event.getPlayer();
 			data.sendDataToServer(player);
 		}

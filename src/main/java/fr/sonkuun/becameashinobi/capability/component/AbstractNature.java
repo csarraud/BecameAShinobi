@@ -1,5 +1,7 @@
 package fr.sonkuun.becameashinobi.capability.component;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 
 public abstract class AbstractNature implements INature {
@@ -31,8 +33,28 @@ public abstract class AbstractNature implements INature {
 	}
 
 	@Override
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	@Override
+	public void addLevel(int increment) {
+		this.level += increment;
+	}
+
+	@Override
 	public int getXp() {
 		return xp;
+	}
+
+	@Override
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+
+	@Override
+	public void addXp(int increment) {
+		this.xp += increment;
 	}
 	
 }
