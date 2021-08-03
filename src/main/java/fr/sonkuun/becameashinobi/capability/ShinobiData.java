@@ -52,6 +52,7 @@ public class ShinobiData {
 	 * Chakra nature
 	 */
 	private ChakraNature chakraNature;
+	private int naturePoint;
 
 	public ShinobiData() {
 		this.maxHealth = 20;
@@ -67,6 +68,7 @@ public class ShinobiData {
 		this.chakraRegenerationTick = 0;
 
 		this.chakraNature = new ChakraNature();
+		this.naturePoint = 1;
 	}
 
 	public ShinobiData(ShinobiData data) {
@@ -83,6 +85,7 @@ public class ShinobiData {
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 
 		this.chakraNature = new ChakraNature(data.getChakraNature());
+		this.naturePoint = data.getNaturePoint();
 	}
 
 	/*
@@ -182,6 +185,7 @@ public class ShinobiData {
 		this.chakraRegenerationTick = data.getChakraRegenerationTick();
 
 		this.chakraNature = new ChakraNature(data.getChakraNature());
+		this.naturePoint = data.getNaturePoint();
 	}
 
 	public static ShinobiData fromPacketBuffer(PacketBuffer buffer) {
@@ -214,7 +218,8 @@ public class ShinobiData {
 								new RaitonNature(buffer.readInt()),
 								new FutonNature(buffer.readInt())
 								)
-						);
+						)
+				.setNaturePoint(buffer.readInt());
 	}
 
 	public void sendDataToClient(PlayerEntity player) {
@@ -247,6 +252,8 @@ public class ShinobiData {
 	public static final String RAITON_NATURE_VALUE_NBT = "raiton_nature_value";
 	public static final String FUTON_NATURE_VALUE_NBT = "futon_nature_value";
 
+	public static final String NATURE_POINT_NBT = "nature_point";
+
 	public static class ShinobiDataNBTStorage implements Capability.IStorage<ShinobiData> {
 
 		@Override
@@ -270,6 +277,8 @@ public class ShinobiData {
 			tag.putInt(DOTON_NATURE_VALUE_NBT, instance.chakraNature.getDoton().getValue());
 			tag.putInt(RAITON_NATURE_VALUE_NBT, instance.chakraNature.getRaiton().getValue());
 			tag.putInt(FUTON_NATURE_VALUE_NBT, instance.chakraNature.getFuton().getValue());
+			
+			tag.putInt(NATURE_POINT_NBT, instance.getNaturePoint());
 
 			return tag;
 		}
@@ -302,6 +311,7 @@ public class ShinobiData {
 								new FutonNature(tag.getInt(FUTON_NATURE_VALUE_NBT))
 								)
 						);
+				instance.setNaturePoint(tag.getInt(NATURE_POINT_NBT));
 			}
 		}
 	}
@@ -483,5 +493,15 @@ public class ShinobiData {
 		}
 		
 		return natureList;
+	}
+	
+	public int getNaturePoint() {
+		return naturePoint;
+	}
+	
+	public ShinobiData setNaturePoint(int points) {
+		this.naturePoint = points;
+		
+		return this;
 	}
 }

@@ -64,6 +64,7 @@ public class ShinobiPacket {
 		buffer.writeInt(message.getShinobiData().getChakraNature().getDoton().getValue());
 		buffer.writeInt(message.getShinobiData().getChakraNature().getRaiton().getValue());
 		buffer.writeInt(message.getShinobiData().getChakraNature().getFuton().getValue());
+		buffer.writeInt(message.getShinobiData().getNaturePoint());
 	}
 
 	public ShinobiPacket decode(PacketBuffer buffer) {

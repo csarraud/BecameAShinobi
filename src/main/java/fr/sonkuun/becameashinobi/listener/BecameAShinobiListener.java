@@ -3,6 +3,8 @@ package fr.sonkuun.becameashinobi.listener;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.gui.widget.ChakraSkillGuiWidget;
@@ -38,8 +40,8 @@ public class BecameAShinobiListener {
 			/*
 			 * No elemental nature already learned
 			 */
-			if(data.getLearnedChakraNature().size() == 0) {
-				player.sendMessage(new StringTextComponent("You can choose one chakra nature to learn."));
+			if(data.getLearnedChakraNature().size() == 0 && data.getNaturePoint() > 0) {
+				player.sendMessage(new StringTextComponent("You have " + ChatFormatting.GOLD + data.getNaturePoint() + ChatFormatting.WHITE + " nature point to spend."));
 			}
 		}
 	}
