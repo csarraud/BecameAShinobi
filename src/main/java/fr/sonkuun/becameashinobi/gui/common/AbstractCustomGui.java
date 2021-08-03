@@ -54,6 +54,7 @@ public abstract class AbstractCustomGui extends Screen {
         this.renderBackground();
         this.renderInside(mouseX, mouseY, left, top, right, bottom);
         this.renderWindow(left, top, right, bottom);
+        this.renderAfter(left, top, right, bottom);
         
         super.render(mouseX, mouseY, partialTicks);
 	}
@@ -116,8 +117,14 @@ public abstract class AbstractCustomGui extends Screen {
         // Bottom right corner
         this.blit(right - CORNER_SIZE, bottom - CORNER_SIZE, WIDTH - CORNER_SIZE, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
 
-        this.font.drawString(getGuiTitle(), left + 8, top + 6, 4210752);
+        this.font.drawString(getGuiTitle(), left + 8, top + 6, 0x404040);
     }
+	
+	public void renderAfter(int left, int top, int right, int bottom) {
+		/*
+		 * Do nothing
+		 */
+	}
 
 	@Override
 	public boolean mouseClicked(double x, double y, int modifiers) {
