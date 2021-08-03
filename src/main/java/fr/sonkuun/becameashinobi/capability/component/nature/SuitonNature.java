@@ -1,5 +1,7 @@
 package fr.sonkuun.becameashinobi.capability.component.nature;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import fr.sonkuun.becameashinobi.capability.component.AbstractNature;
 import fr.sonkuun.becameashinobi.elemental.ElementalNature;
 
@@ -15,5 +17,10 @@ public class SuitonNature extends AbstractNature {
 	
 	public SuitonNature(int level, int xp) {
 		super(ElementalNature.SUITON, level, xp);
+	}
+
+	@Override
+	public ChatFormatting getChatFormattingColor() {
+		return ChatFormatting.AQUA;
 	}
 }

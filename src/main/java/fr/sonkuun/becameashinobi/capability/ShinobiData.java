@@ -1,5 +1,9 @@
 package fr.sonkuun.becameashinobi.capability;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.sonkuun.becameashinobi.capability.component.AbstractNature;
 import fr.sonkuun.becameashinobi.capability.component.ChakraNature;
 import fr.sonkuun.becameashinobi.capability.component.nature.DotonNature;
 import fr.sonkuun.becameashinobi.capability.component.nature.FutonNature;
@@ -59,7 +63,7 @@ public class ShinobiData {
 		this.chakraValue = 0;
 		this.baseChakraRegenerationPerSecond = 1.0;
 		this.chakraRegenerationPerSecond = 1.0;
-		this.chakraRegenerationFactor = 100;
+		this.chakraRegenerationFactor = 50;
 		this.chakraRegenerationTick = 0;
 
 		this.chakraNature = new ChakraNature();
@@ -450,4 +454,44 @@ public class ShinobiData {
 		return chakraNature;
 	}
 
+	public List<AbstractNature> getLearnedChakraNature() {
+		List<AbstractNature> natureList = new ArrayList<AbstractNature>();
+		
+		/*
+		 * Katon
+		 */
+		if(chakraNature.getKaton().getLevel() != 0) {
+			natureList.add(chakraNature.getKaton());
+		}
+		
+		/*
+		 * Suiton
+		 */
+		if(chakraNature.getSuiton().getLevel() != 0) {
+			natureList.add(chakraNature.getSuiton());
+		}
+		
+		/*
+		 * Doton
+		 */
+		if(chakraNature.getDoton().getLevel() != 0) {
+			natureList.add(chakraNature.getDoton());
+		}
+		
+		/*
+		 * Raiton
+		 */
+		if(chakraNature.getRaiton().getLevel() != 0) {
+			natureList.add(chakraNature.getRaiton());
+		}
+		
+		/*
+		 * Futon
+		 */
+		if(chakraNature.getFuton().getLevel() != 0) {
+			natureList.add(chakraNature.getFuton());
+		}
+		
+		return natureList;
+	}
 }

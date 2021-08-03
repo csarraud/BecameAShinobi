@@ -7,6 +7,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
+import fr.sonkuun.becameashinobi.capability.component.AbstractNature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
@@ -35,19 +36,39 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
 			ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
 			
+			/*
+			 * Health
+			 */
 			int maxHealth = data.getMaxHealth();
 			double health = data.getRoundedHealth();
 			double healthRegeneration = data.getTotalRegenerationHealth();
+
+			lore.add(ChatFormatting.RED + "Health : " + health + " / " + maxHealth);
+			lore.add(ChatFormatting.RED + "Health regeneration : +" + healthRegeneration + "/s");
+			lore.add("");
 			
+			/*
+			 * Chakra
+			 */
 			double maxChakra = data.getChakraMaxValue();
 			double chakra = data.getChakraValue();
 			double chakraRegeneration = data.getChakraRegenerationPerSecond();
-			
-			lore.add(ChatFormatting.RED + "Health : " + health + " / " + maxHealth);
-			lore.add(ChatFormatting.RED + "Health regeneration : +" + healthRegeneration + "/s");
-			
+			int sneakFactor = data.getChakraRegenerationFactor();
+
 			lore.add(ChatFormatting.BLUE + "Chakra : " + chakra + " / " + maxChakra);
 			lore.add(ChatFormatting.BLUE + "Chakra regeneration : +" + chakraRegeneration + "/s");
+			lore.add(ChatFormatting.BLUE + "Sneak factor : " + sneakFactor + "%");
+			lore.add("");
+			
+			/*
+			 * Chakra nature
+			 */
+			for(AbstractNature nature : data.getLearnedChakraNature()) {
+
+				lore.add(nature.getChatFormattingColor() + nature.getNature().toString() + " level : " + nature.getLevel());
+				lore.add(nature.getChatFormattingColor() + nature.getNature().toString() + " xp : " + nature.getXp());
+				lore.add("");
+			}
 			
 			return lore;
 		}
