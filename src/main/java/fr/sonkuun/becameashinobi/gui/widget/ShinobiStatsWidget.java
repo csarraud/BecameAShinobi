@@ -29,7 +29,7 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 	public List<String> createDescription() {
 		List<String> lore = new ArrayList<String>();
 		
-		lore.add(ChatFormatting.BLUE + "Shinobi characteristic");
+		lore.add(ChatFormatting.GRAY + "" + ChatFormatting.UNDERLINE + "Shinobi characteristic");
 		lore.add("");
 		
 		ClientPlayerEntity player = Minecraft.getInstance().player;
@@ -43,8 +43,9 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			double health = data.getRoundedHealth();
 			double healthRegeneration = data.getTotalRegenerationHealth();
 
-			lore.add(ChatFormatting.RED + "Health : " + health + " / " + maxHealth);
-			lore.add(ChatFormatting.RED + "Regeneration : +" + healthRegeneration + "/s");
+			lore.add(ChatFormatting.RED + "Health");
+			lore.add(ChatFormatting.GOLD  + "" + health + ChatFormatting.RED + " / " + ChatFormatting.GOLD + maxHealth);
+			lore.add(ChatFormatting.RED + "+" + ChatFormatting.GOLD + healthRegeneration + ChatFormatting.RED + "/s");
 			lore.add("");
 			
 			/*
@@ -55,9 +56,9 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			double chakraRegeneration = data.getChakraRegenerationPerSecond();
 			int sneakFactor = data.getChakraRegenerationFactor();
 
-			lore.add(ChatFormatting.BLUE + "Chakra : " + chakra + " / " + maxChakra);
-			lore.add(ChatFormatting.BLUE + "Regeneration : +" + chakraRegeneration + "/s");
-			lore.add(ChatFormatting.BLUE + "Sneak factor : " + sneakFactor + "%");
+			lore.add(ChatFormatting.BLUE + "Chakra");
+			lore.add(ChatFormatting.GOLD + "" + chakra + ChatFormatting.BLUE + " / " + ChatFormatting.GOLD + maxChakra);
+			lore.add(ChatFormatting.BLUE + "+" + ChatFormatting.GOLD + chakraRegeneration + ChatFormatting.BLUE + "/s     (+" + ChatFormatting.GOLD + sneakFactor + ChatFormatting.BLUE + "%)");
 			lore.add("");
 			
 			/*
