@@ -68,7 +68,6 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 			for(AbstractNature nature : data.getLearnedChakraNature()) {
 
 				lore.add(nature.getChatFormattingColor() + nature.getNature().getName() + " " + ChatFormatting.GOLD + nature.getValue());
-				lore.add("");
 			}
 			
 			return lore;

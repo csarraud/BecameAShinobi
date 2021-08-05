@@ -49,7 +49,6 @@ public class FutonWidget extends AbstractSkillWidget implements IUpgradeNatureWi
 		}
 
 		lore.add(ChatFormatting.GREEN + "Futon " + value);
-		lore.add("");
 
 		return lore;
 	}

@@ -49,7 +49,6 @@ public class KatonWidget extends AbstractSkillWidget implements IUpgradeNatureWi
 		}
 
 		lore.add(ChatFormatting.RED + "Katon " + value);
-		lore.add("");
 
 		return lore;
 	}

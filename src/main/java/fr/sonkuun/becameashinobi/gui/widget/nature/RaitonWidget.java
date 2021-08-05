@@ -49,7 +49,6 @@ public class RaitonWidget extends AbstractSkillWidget implements IUpgradeNatureW
 		}
 
 		lore.add(ChatFormatting.YELLOW + "Raiton " + value);
-		lore.add("");
 
 		return lore;
 	}

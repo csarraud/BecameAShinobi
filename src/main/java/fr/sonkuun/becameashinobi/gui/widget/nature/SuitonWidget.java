@@ -49,7 +49,6 @@ public class SuitonWidget extends AbstractSkillWidget implements IUpgradeNatureW
 		}
 
 		lore.add(ChatFormatting.AQUA + "Suiton " + value);
-		lore.add("");
 
 		return lore;
 	}

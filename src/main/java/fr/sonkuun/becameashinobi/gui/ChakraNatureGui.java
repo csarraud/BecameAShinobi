@@ -39,7 +39,7 @@ public class ChakraNatureGui extends AbstractCustomGui {
 		this.skillWidgets.add(new RaitonWidget(220, 130, 20, 20));
 		this.skillWidgets.add(new FutonWidget(240, 80, 20, 20));
 		
-		this.skillWidgets.add(new ValidationNaturePointWidget(this, 300, 150, 20, 20));
+		this.skillWidgets.add(new ValidationNaturePointWidget(this, 10, 160, 20, 20));
 		
 		super.init();
 	}

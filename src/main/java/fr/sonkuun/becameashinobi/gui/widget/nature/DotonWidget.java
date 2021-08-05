@@ -49,7 +49,6 @@ public class DotonWidget extends AbstractSkillWidget implements IUpgradeNatureWi
 		}
 
 		lore.add(ChatFormatting.GRAY + "Doton " + value);
-		lore.add("");
 
 		return lore;
 	}
