@@ -59,8 +59,13 @@ public class ChakraNatureGui extends AbstractCustomGui {
 	public boolean mouseClicked(double x, double y, int modifiers) {
 
 		for(AbstractSkillWidget skillItem : this.skillWidgets) {
-			if(skillItem.isMouseOver() && skillItem instanceof IUpgradeNatureWidget) {
-				naturePoints = ((IUpgradeNatureWidget) skillItem).mouseClickedWithNaturePoint(naturePoints, x, y, modifiers);
+			if(skillItem.isMouseOver()) {
+				if(skillItem instanceof IUpgradeNatureWidget) {
+					naturePoints = ((IUpgradeNatureWidget) skillItem).mouseClickedWithNaturePoint(naturePoints, x, y, modifiers);
+				}
+				else {
+					skillItem.mouseClicked(x, y, modifiers);
+				}
 			}
 		}
 		
