@@ -504,4 +504,12 @@ public class ShinobiData {
 		
 		return this;
 	}
+	
+	public void addNaturePoint(int amount) {
+		this.naturePoint += amount;
+	}
+	
+	public void removeNaturePoint(int amount) {
+		this.naturePoint -= amount;
+	}
 }

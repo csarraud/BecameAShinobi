@@ -72,6 +72,18 @@ public class RaitonWidget extends AbstractSkillWidget implements IUpgradeNatureW
 	}
 
 	@Override
+	public void validateChanges() {
+		ClientPlayerEntity player = Minecraft.getInstance().player;
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+			
+			data.getChakraNature().getRaiton().addValue(temporaryValue);
+			data.removeNaturePoint(temporaryValue);
+			temporaryValue = 0;
+		}
+	}
+
+	@Override
 	protected Screen createGui() {
 		return null;
 	}

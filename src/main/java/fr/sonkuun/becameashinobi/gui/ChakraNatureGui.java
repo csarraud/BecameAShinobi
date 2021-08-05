@@ -10,6 +10,7 @@ import fr.sonkuun.becameashinobi.gui.widget.nature.KatonWidget;
 import fr.sonkuun.becameashinobi.gui.widget.nature.RaitonWidget;
 import fr.sonkuun.becameashinobi.gui.widget.nature.SuitonWidget;
 import fr.sonkuun.becameashinobi.gui.widget.IUpgradeNatureWidget;
+import fr.sonkuun.becameashinobi.gui.widget.ValidationNaturePointWidget;
 import fr.sonkuun.becameashinobi.util.Color;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -25,11 +26,6 @@ public class ChakraNatureGui extends AbstractCustomGui {
 	@Override
 	protected void init() {
 		
-		/*
-		 * TODO
-		 * add nature widget --> Left clic +1 / Right clic -1 nature point in nature
-		 * add validation widget
-		 */
 		ClientPlayerEntity player = this.minecraft.player;
 		
 		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
@@ -42,6 +38,8 @@ public class ChakraNatureGui extends AbstractCustomGui {
 		this.skillWidgets.add(new DotonWidget(160, 130, 20, 20));
 		this.skillWidgets.add(new RaitonWidget(220, 130, 20, 20));
 		this.skillWidgets.add(new FutonWidget(240, 80, 20, 20));
+		
+		this.skillWidgets.add(new ValidationNaturePointWidget(this, 300, 150, 20, 20));
 		
 		super.init();
 	}
@@ -70,6 +68,22 @@ public class ChakraNatureGui extends AbstractCustomGui {
 		}
 		
 		return super.mouseClicked(x, y, modifiers);
+	}
+	
+	public void validateChanges() {
+		
+		for(AbstractSkillWidget widget : this.skillWidgets) {
+			if(widget instanceof IUpgradeNatureWidget) {
+				((IUpgradeNatureWidget) widget).validateChanges();
+			}
+		}
+		
+		ClientPlayerEntity player = this.minecraft.player;
+		
+		if(player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+			data.sendDataToServer(player);
+		}
 	}
 
 	@Override
