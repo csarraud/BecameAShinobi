@@ -43,7 +43,7 @@ public class ValidationNaturePointWidget extends AbstractSkillWidget {
 		this.gui.validateChanges();
 		
 		/*
-		 * Play sound
+		 * TODO : Play sound
 		 */
 		
 		return true;
