@@ -128,6 +128,12 @@ public abstract class AbstractCustomGui extends Screen {
 
 	@Override
 	public boolean mouseClicked(double x, double y, int modifiers) {
+
+		for(AbstractSkillWidget skillItem : this.skillWidgets) {
+			if(skillItem.isMouseOver()) {
+				skillItem.mouseClicked(x, y, modifiers);
+			}
+		}
 		
 		return super.mouseClicked(x, y, modifiers);
 	}

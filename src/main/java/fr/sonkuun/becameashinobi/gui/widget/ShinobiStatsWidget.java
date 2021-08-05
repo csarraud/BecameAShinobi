@@ -8,6 +8,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import fr.sonkuun.becameashinobi.capability.CapabilityBecameAShinobi;
 import fr.sonkuun.becameashinobi.capability.ShinobiData;
 import fr.sonkuun.becameashinobi.capability.component.AbstractNature;
+import fr.sonkuun.becameashinobi.gui.ChakraNatureGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
@@ -80,12 +81,12 @@ public class ShinobiStatsWidget extends AbstractSkillWidget {
 
 	@Override
 	protected Screen createGui() {
-		return null;
+		return new ChakraNatureGui(Minecraft.getInstance().player.connection.getAdvancementManager());
 	}
 
 	@Override
 	protected boolean canOpenGui() {
-		return false;
+		return true;
 	}
 
 }

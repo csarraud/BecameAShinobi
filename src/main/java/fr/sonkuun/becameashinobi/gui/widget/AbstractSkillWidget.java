@@ -52,7 +52,7 @@ public abstract class AbstractSkillWidget extends Widget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int modifiers) {
-        if (super.mouseClicked(mouseX, mouseY, modifiers) && this.canOpenGui()) {
+        if (this.canOpenGui()) {
             Minecraft.getInstance().displayGuiScreen(this.createGui());
             return true;
         }
