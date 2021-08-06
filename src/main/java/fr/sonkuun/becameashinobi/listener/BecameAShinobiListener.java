@@ -18,9 +18,12 @@ import net.minecraft.util.text.Style;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 
@@ -85,6 +88,20 @@ public class BecameAShinobiListener {
 			data.updateChakra(player);
 			data.updateHealth(player);
 		}
+	}
+	
+	@SubscribeEvent
+	public void onLevelUp(PlayerXpEvent.LevelChange event) {
+		PlayerEntity player = event.getPlayer();
+		if(!player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).isPresent()) {
+			return;
+		}
+		
+		ShinobiData data = player.getCapability(CapabilityBecameAShinobi.CAPABILITY_SHINOBI).orElse(null);
+		data.addNaturePoint(5);
+		data.sendDataToClient(player);
+		
+		player.sendMessage(new StringTextComponent(ChatFormatting.GOLD + "+" + data.getNaturePoint() + ChatFormatting.WHITE + " nature point."));
 	}
 	
 	/*
