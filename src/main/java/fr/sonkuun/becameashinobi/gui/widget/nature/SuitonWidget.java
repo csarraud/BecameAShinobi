@@ -49,6 +49,9 @@ public class SuitonWidget extends AbstractSkillWidget implements IUpgradeNatureW
 		}
 
 		lore.add(ChatFormatting.AQUA + "Suiton " + value);
+		lore.add("");
+		lore.add("Left click to add 1 nature point.");
+		lore.add("Right click to remove 1 nature point.");
 
 		return lore;
 	}

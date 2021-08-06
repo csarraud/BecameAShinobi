@@ -49,6 +49,9 @@ public class KatonWidget extends AbstractSkillWidget implements IUpgradeNatureWi
 		}
 
 		lore.add(ChatFormatting.RED + "Katon " + value);
+		lore.add("");
+		lore.add("Left click to add 1 nature point.");
+		lore.add("Right click to remove 1 nature point.");
 
 		return lore;
 	}
